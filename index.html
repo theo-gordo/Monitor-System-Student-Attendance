@@ -1,0 +1,2589 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta name="theme-color" content="#1238cf">
+	<meta name="description" content="STI Attendance Monitoring System campus portal.">
+	<title>STI Attendance Monitoring System</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<main class="page">
+		<section class="campus-photo" aria-label="Students on campus">
+			<img src="assets/campus-students.png" alt="STI students gathered together on campus">
+			<div class="photo-label">CAMPUS PORTAL <span>2026 / 2027</span></div>
+			<div class="photo-caption">
+				<p>Every day counts</p>
+				<h2>Here for the moments that move you forward.</h2>
+			</div>
+		</section>
+
+		<section class="portal" aria-labelledby="system-title">
+			<p class="term-label">Your campus, in sync</p>
+			<div class="brand-panel">
+				<img class="brand-mark" src="assets/sti-logo.jpg" alt="STI logo">
+				<h1 id="system-title"><span>Attendance</span><span>Monitoring</span><span>System</span></h1>
+			</div>
+			<p class="portal-copy">A simpler way to stay connected to your classes, your campus, and the people counting on you.</p>
+			<p class="demo-access">Local demo access · Admin ID <strong>admin</strong> · Password <strong>admin123</strong></p>
+			<div class="actions" aria-label="Sign in options">
+				<button class="login-button" type="button" data-role="Student">Student Log in</button>
+				<button class="login-button admin" type="button" data-role="Admin">Admin Log in</button>
+			</div>
+			<footer class="portal-footer"><span>STI</span> Attendance Monitoring System <span aria-hidden="true">·</span> Campus access</footer>
+		</section>
+	</main>
+
+	<dialog aria-labelledby="dialog-title">
+		<div class="dialog-content">
+			<div class="dialog-topline">
+				<div>
+					<p class="dialog-kicker">ASI Campus Portal</p>
+					<h2 id="dialog-title">Welcome back</h2>
+				</div>
+				<button class="dialog-close" type="button" aria-label="Close sign-in dialog">&times;</button>
+			</div>
+			<form class="login-form">
+				<label for="admin-id"><span id="login-id-label">Admin ID</span>
+					<input id="admin-id" name="admin-id" type="text" autocomplete="username" placeholder="Enter your admin ID" required>
+				</label>
+				<label for="password">Password
+					<input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+				</label>
+				<button class="submit-button" type="submit">Continue</button>
+				<p class="form-status" role="status" aria-live="polite"></p>
+			</form>
+		</div>
+	</dialog>
+
+	<main class="dashboard" id="dashboard" hidden>
+		<div class="dashboard-frame">
+			<aside class="dashboard-sidebar" aria-label="Dashboard navigation">
+				<div class="dash-brand"><img src="assets/sti-logo.jpg" alt=""><span>STI<br>ATTENDANCE</span></div>
+				<nav class="dash-nav">
+					<button type="button" aria-current="page" data-target="overview"><span class="nav-icon" aria-hidden="true">⌂</span>Overview</button>
+					<button type="button" data-target="notifications"><span class="nav-icon" aria-hidden="true">♧</span>Notifications</button>
+					<button type="button" data-target="attendance"><span class="nav-icon" aria-hidden="true">◷</span>Attendance</button>
+					<button type="button" data-target="events"><span class="nav-icon" aria-hidden="true">▦</span>Events</button>
+					<button type="button" data-target="students" hidden><span class="nav-icon" aria-hidden="true">♙</span>Students</button>
+					<button type="button" data-target="student-reports"><span class="nav-icon" aria-hidden="true">⚑</span>Student reports</button>
+					<button type="button" data-target="student-friends"><span class="nav-icon" aria-hidden="true">♧</span>Friends &amp; chat</button>
+				</nav>
+				<button class="dash-logout" type="button"><span class="nav-icon" aria-hidden="true">↪</span>Log out</button>
+			</aside>
+
+			<div class="dashboard-main" id="overview">
+				<header class="dashboard-header">
+					<div><h1>Admin dashboard</h1><p>Here’s what’s happening across campus today.</p></div>
+					<div class="header-tools">
+						<button class="quick-trigger" type="button" aria-haspopup="dialog" aria-controls="quick-actions-dialog"><span aria-hidden="true">+</span>Quick actions</button>
+						<button class="assistant-trigger" type="button" aria-haspopup="dialog" aria-controls="assistant-dialog"><span aria-hidden="true">✦</span>AI assistant</button>
+						<button class="student-password-trigger" type="button" aria-haspopup="dialog" aria-controls="change-password-dialog" hidden>Change password</button>
+						<input class="search-box" type="search" aria-label="Search dashboard" placeholder="Search dashboard">
+						<button class="icon-button" type="button" aria-label="View notifications" data-target="notifications">♧<span class="notification-dot"></span></button>
+						<button class="admin-chip" type="button" aria-haspopup="dialog" aria-controls="profile-dialog" aria-label="View profile"><span class="admin-avatar" aria-hidden="true"><img class="admin-avatar-photo" alt="" hidden><span class="admin-avatar-initial">A</span></span><span class="admin-profile"><span class="admin-name">Administrator</span><span class="admin-role">Campus admin</span></span></button>
+					</div>
+				</header>
+
+				<section class="welcome-banner" aria-label="Welcome">
+					<div><small>STI ATTENDANCE MONITORING SYSTEM</small><h2>Welcome back, Admin</h2><p>Your campus overview is ready.</p></div>
+					<img class="banner-mark" src="assets/sti-logo.jpg" alt="STI logo">
+				</section>
+
+				<div class="dashboard-grid">
+					<div class="dashboard-column">
+						<section id="attendance" aria-labelledby="metrics-title">
+							<div class="section-heading"><h2 id="metrics-title">Attendance summary</h2><span style="color:#8b93a5;font-size:9px">Today</span></div>
+							<section class="student-attendance content-panel" aria-labelledby="student-attendance-title" hidden>
+								<div class="section-heading"><h2 id="student-attendance-title">My attendance today</h2><strong class="student-attendance-status">Not timed in</strong></div>
+								<div class="student-attendance-fields">
+									<span class="student-attendance-note">Time in to record your presence.</span>
+									<div class="student-attendance-times"><span>Time in <strong class="student-time-in">--</strong></span><span>Time out <strong class="student-time-out">--</strong></span></div>
+								</div>
+								<div class="student-attendance-actions">
+									<button class="attendance-action time-in-button" type="button">Time in</button>
+									<button class="attendance-action time-out-button" type="button" disabled>Time out</button>
+								</div>
+								<p class="student-attendance-result" role="status" aria-live="polite"></p>
+							</section>
+							<div class="metric-grid attendance-dates">
+								<div class="date-stat"><span>Recent date</span><strong id="recent-attendance-date">--</strong></div>
+								<div class="date-stat"><span>Present</span><strong id="present-today-count">0</strong></div>
+								<div class="date-stat"><span>Absent today</span><strong id="absent-today-count">0</strong></div>
+								<div class="date-stat"><span>Date today</span><strong id="today-date">--</strong></div>
+							</div>
+							<div class="section-heading"><h2 id="attendance-totals-title">Student totals today</h2></div>
+							<div class="attendance-totals" aria-labelledby="attendance-totals-title">
+								<div class="attendance-total"><span>Present students</span><strong id="total-present-count">0</strong></div>
+								<div class="attendance-total"><span>Absent students</span><strong id="total-absent-count">0</strong></div>
+								<div class="attendance-total"><span>Late students</span><strong id="total-late-count">0</strong></div>
+								<div class="attendance-total combined"><span>Total students</span><strong id="total-students-count">0</strong></div>
+							</div>
+						</section>
+
+						<section id="events" aria-labelledby="events-title">
+							<div class="section-heading"><h2 id="events-title">Ongoing &amp; upcoming activities</h2></div>
+							<div class="content-panel">
+								<button class="event-item event-focus" type="button" data-detail-title="Faculty orientation" data-detail-date="Today · 2:00 PM" data-detail-description="Main campus, conference hall" data-detail-status="Ongoing"><span class="event-top"><strong>Faculty orientation</strong><span class="event-date">Today · 2:00 PM</span></span><span class="event-description">Main campus, conference hall</span><span class="event-tag">Ongoing</span></button>
+								<button class="event-item event-focus" type="button" data-detail-title="Student wellness week" data-detail-date="Oct 21 · 9:00 AM" data-detail-description="Student center · All students" data-detail-status="Upcoming"><span class="event-top"><strong>Student wellness week</strong><span class="event-date">Oct 21 · 9:00 AM</span></span><span class="event-description">Student center · All students</span><span class="event-tag upcoming">Upcoming</span></button>
+								<button class="event-item event-focus" type="button" data-detail-title="Term planning meeting" data-detail-date="Oct 24 · 1:30 PM" data-detail-description="Admin building · Room 204" data-detail-status="Upcoming"><span class="event-top"><strong>Term planning meeting</strong><span class="event-date">Oct 24 · 1:30 PM</span></span><span class="event-description">Admin building · Room 204</span><span class="event-tag upcoming">Upcoming</span></button>
+							</div>
+						</section>
+					</div>
+
+					<div class="dashboard-column secondary">
+						<section id="notifications" aria-labelledby="notifications-title">
+							<div class="section-heading"><h2 id="notifications-title">Notifications</h2><button class="mark-read" type="button">Mark read</button></div>
+							<div class="section-heading announcement-heading">
+								<h3>Campus announcements</h3>
+								<button class="announcement-add" type="button" hidden>New announcement</button>
+							</div>
+							<p class="announcement-status" role="status" aria-live="polite"></p>
+							<form class="announcement-editor content-panel" hidden>
+								<h4 class="announcement-editor-title">New announcement</h4>
+								<label>Title
+									<input name="title" type="text" maxlength="100" required placeholder="Announcement title">
+								</label>
+								<label>Message
+									<textarea name="body" rows="3" maxlength="1000" required placeholder="Write an update for students"></textarea>
+								</label>
+								<div class="announcement-editor-actions">
+									<button class="announcement-cancel" type="button">Cancel</button>
+									<button class="announcement-save" type="submit">Publish announcement</button>
+								</div>
+							</form>
+							<div class="content-panel list-stack announcement-list" aria-live="polite"></div>
+							<div class="content-panel list-stack">
+								<button class="list-item notification-focus" type="button" data-detail-title="Attendance review needed" data-detail-description="3 student records need approval."><span class="message-unread" aria-hidden="true"></span><span class="item-copy"><strong>Attendance review needed</strong><span>3 student records need approval.</span></span></button>
+								<button class="list-item notification-focus" type="button" data-detail-title="Weekly summary ready" data-detail-description="Your attendance summary is available."><span class="item-copy"><strong>Weekly summary ready</strong><span>Your attendance summary is available.</span></span></button>
+							</div>
+						</section>
+
+					</div>
+				</div>
+
+				<section class="student-management-section" id="students" aria-labelledby="student-management-title" hidden>
+					<div class="section-heading student-management-heading">
+						<div>
+							<h2 id="student-management-title">Registered students</h2>
+							<p class="reports-intro">Student accounts, sorted alphabetically by name.</p>
+						</div>
+						<div class="student-management-actions">
+							<strong class="registered-student-count" aria-live="polite">0 registered</strong>
+							<button class="student-bulk-register" type="button">Mass register</button>
+						</div>
+					</div>
+					<div class="student-roster-filters">
+						<label for="student-roster-search">Search students
+							<input id="student-roster-search" type="search" placeholder="Name or student ID">
+						</label>
+						<label for="student-roster-grade">Grade
+							<select id="student-roster-grade"><option value="">All grades</option></select>
+						</label>
+						<label for="student-roster-strand">Strand
+							<select id="student-roster-strand"><option value="">All strands</option></select>
+						</label>
+					</div>
+					<div class="student-roster-panel content-panel">
+						<div class="student-roster-scroll">
+							<table class="student-roster-table">
+								<thead><tr><th scope="col">Student name</th><th scope="col">Student ID</th><th scope="col">Grade</th><th scope="col">Strand</th></tr></thead>
+								<tbody class="student-roster-list"></tbody>
+							</table>
+						</div>
+						<p class="student-roster-status" role="status" aria-live="polite"></p>
+					</div>
+				</section>
+
+				<section class="student-reports-section" id="student-reports" aria-labelledby="student-reports-title">
+					<div class="section-heading">
+						<div>
+							<h2 id="student-reports-title">Student concerns</h2>
+							<p class="reports-intro">A space to share concerns and follow up on how they’re being handled.</p>
+						</div>
+						<span class="reports-count" aria-live="polite"></span>
+					</div>
+					<p class="concern-list-status" role="status" aria-live="polite"></p>
+					<section class="concern-submit content-panel" aria-labelledby="concern-form-title" hidden>
+						<h3 id="concern-form-title">Share a concern</h3>
+						<p>Your report is visible to campus administrators. Please don’t include passwords or other sensitive information.</p>
+						<form class="concern-form">
+							<label>Concern type
+								<select name="category" required>
+									<option value="">Choose a category</option>
+									<option>Academic support</option>
+									<option>Facilities</option>
+									<option>Safety</option>
+									<option>Well-being</option>
+									<option>Other</option>
+								</select>
+							</label>
+							<label>Subject
+								<input name="subject" type="text" maxlength="100" required placeholder="Briefly describe your concern">
+							</label>
+							<label class="concern-description-label">Details
+								<textarea name="description" rows="4" maxlength="2000" required placeholder="Share any details that will help us understand the concern"></textarea>
+							</label>
+							<button class="concern-submit-button" type="submit">Submit concern</button>
+							<p class="concern-form-status" role="status" aria-live="polite"></p>
+						</form>
+					</section>
+					<div class="content-panel concern-list-panel">
+						<div class="concern-list" aria-live="polite"></div>
+					</div>
+				</section>
+
+				<section class="student-friends-section" id="student-friends" aria-labelledby="student-friends-title" hidden>
+					<div class="section-heading">
+						<div>
+							<h2 id="student-friends-title">Friends &amp; student chat</h2>
+							<p class="reports-intro">Find classmates, connect, and chat with your friends.</p>
+						</div>
+						<span class="friends-count" aria-live="polite"></span>
+					</div>
+					<p class="friends-notice">Prototype: friends, chats, and files are saved in this browser only. Do not share sensitive information or confidential files.</p>
+					<p class="friends-status" role="status" aria-live="polite"></p>
+					<div class="friends-layout">
+						<div class="friends-sidebar">
+							<section class="content-panel friend-discovery" aria-labelledby="friend-discovery-title">
+								<h3 id="friend-discovery-title">Find students</h3>
+								<label class="visually-hidden" for="friend-search">Search students</label>
+								<input id="friend-search" type="search" maxlength="80" placeholder="Search by name or student ID">
+								<div class="student-directory" aria-live="polite"></div>
+							</section>
+							<section class="content-panel friend-requests" aria-labelledby="friend-requests-title">
+								<h3 id="friend-requests-title">Friend requests <span class="request-count"></span></h3>
+								<div class="friend-request-list"></div>
+							</section>
+							<section class="content-panel friend-list-panel" aria-labelledby="friend-list-title">
+								<h3 id="friend-list-title">My friends</h3>
+								<div class="friend-list"></div>
+							</section>
+						</div>
+						<section class="content-panel student-chat-panel" aria-label="Student conversation">
+							<div class="student-chat-empty"><span aria-hidden="true">✉</span><p>Choose a friend to start chatting.</p></div>
+							<div class="student-chat" hidden>
+								<header class="student-chat-header">
+									<div class="student-chat-avatar"></div>
+									<div><h3 class="student-chat-name"></h3><p>Student friend</p></div>
+								</header>
+								<div class="student-chat-thread" aria-live="polite"></div>
+								<p class="student-chat-status" role="status" aria-live="polite"></p>
+								<form class="student-chat-form">
+									<label class="visually-hidden" for="student-chat-message">Message</label>
+									<textarea id="student-chat-message" name="message" rows="2" maxlength="2000" placeholder="Write a message..."></textarea>
+									<div class="student-chat-actions">
+										<label class="chat-attachment-label" for="student-chat-file">Attach file</label>
+										<input id="student-chat-file" name="attachment" type="file" accept="image/*,.pdf,.txt,.doc,.docx" hidden>
+										<span class="chat-attachment-name">No file selected · max 2 MB</span>
+										<button class="message-send-button" type="submit">Send</button>
+									</div>
+								</form>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</main>
+
+	<dialog class="quick-dialog" id="quick-actions-dialog" aria-labelledby="quick-actions-title">
+		<div class="quick-shell">
+			<header class="quick-heading">
+				<div><p>Admin tools</p><h2 id="quick-actions-title">Quick actions</h2></div>
+				<button class="quick-close" type="button" aria-label="Close quick actions">&times;</button>
+			</header>
+			<div class="quick-layout">
+				<nav class="quick-options" aria-label="Quick actions">
+					<button class="quick-option" type="button" data-action="register" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">＋</span>Register a student</button>
+					<button class="quick-option" type="button" data-action="bulk-register" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">⇧</span>Mass register students</button>
+					<button class="quick-option" type="button" data-action="view" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">⌕</span>View student</button>
+					<button class="quick-option" type="button" data-action="delete-student" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">−</span>Delete student account</button>
+					<button class="quick-option" type="button" data-action="reset-password" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">↻</span>Reset student password</button>
+					<button class="quick-option" type="button" data-action="attendance" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">◷</span>Mark attendance</button>
+					<button class="quick-option" type="button" data-action="reports" aria-pressed="false"><span class="quick-option-icon" aria-hidden="true">▤</span>Generate reports</button>
+				</nav>
+				<section class="quick-detail" aria-live="polite">
+					<div class="quick-empty"><span aria-hidden="true">＋</span><p>Choose an action to get started. Your changes are saved in this browser.</p></div>
+				</section>
+			</div>
+		</div>
+	</dialog>
+
+	<dialog class="assistant-dialog" id="assistant-dialog" aria-labelledby="assistant-title">
+		<div class="assistant-shell">
+			<header class="assistant-heading">
+				<div><p>STI CAMPUS SUPPORT</p><h2 id="assistant-title">Campus AI assistant</h2></div>
+				<button class="assistant-close" type="button" aria-label="Close campus assistant">&times;</button>
+			</header>
+			<p class="assistant-note">Prototype assistant: answers use this browser’s campus data and built-in guidance; no live AI service is connected.</p>
+			<div class="assistant-suggestions" aria-label="Suggested questions">
+				<button type="button" data-assistant-question="Show campus announcements">Announcements</button>
+				<button type="button" data-assistant-question="How does attendance work?">Attendance help</button>
+				<button type="button" data-assistant-question="What can I do here?">What can I do?</button>
+			</div>
+			<div class="assistant-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+			<form class="assistant-form">
+				<label class="visually-hidden" for="assistant-question">Ask the campus assistant</label>
+				<textarea id="assistant-question" name="question" rows="2" maxlength="500" required placeholder="Ask about campus or using this portal..."></textarea>
+				<button type="submit">Send</button>
+			</form>
+		</div>
+	</dialog>
+
+	<dialog class="focus-dialog" id="focus-dialog" aria-labelledby="focus-dialog-title">
+		<article class="focus-card">
+			<button class="focus-close" type="button" aria-label="Back to dashboard">&times;</button>
+			<p class="focus-kicker" id="focus-dialog-kicker">Dashboard detail</p>
+			<h2 id="focus-dialog-title"></h2>
+			<p id="focus-dialog-date"></p>
+			<p id="focus-dialog-description"></p>
+			<p id="focus-dialog-status"></p>
+			<section class="message-thread-panel" hidden aria-label="Message conversation">
+				<div class="message-thread" aria-live="polite"></div>
+				<form class="message-reply-form">
+					<label for="message-reply">Reply</label>
+					<textarea id="message-reply" name="reply" rows="3" maxlength="1000" required placeholder="Write a reply..."></textarea>
+					<button class="message-send-button" type="submit">Send reply</button>
+					<p class="message-status" role="status" aria-live="polite"></p>
+				</form>
+			</section>
+			<button class="focus-back" type="button">Back to dashboard</button>
+		</article>
+	</dialog>
+
+	<dialog class="inbox-dialog" id="inbox-dialog" aria-labelledby="inbox-title">
+		<div class="inbox-shell">
+			<header class="inbox-header">
+				<div><p>Campus inbox</p><h2 id="inbox-title">All messages</h2></div>
+				<button class="inbox-close" type="button" aria-label="Close inbox">&times;</button>
+			</header>
+			<p class="inbox-note">This prototype saves messages in this browser; it does not send email or sync to other devices.</p>
+			<div class="inbox-layout">
+				<section class="inbox-list-column" aria-label="All conversations">
+					<div class="inbox-list"></div>
+				</section>
+				<form class="compose-message-form">
+					<h3>New message</h3>
+					<label for="message-recipient">To
+						<input id="message-recipient" name="recipient" maxlength="80" required placeholder="Name or campus office">
+					</label>
+					<label for="message-subject">Subject
+						<input id="message-subject" name="subject" maxlength="100" required placeholder="Message subject">
+					</label>
+					<label for="message-compose">Message
+						<textarea id="message-compose" name="message" rows="5" maxlength="1000" required placeholder="Write a message..."></textarea>
+					</label>
+					<button class="message-send-button" type="submit">Send message</button>
+					<p class="compose-status" role="status" aria-live="polite"></p>
+				</form>
+			</div>
+		</div>
+	</dialog>
+
+	<dialog class="profile-dialog" id="profile-dialog" aria-labelledby="profile-dialog-title">
+		<div class="profile-shell">
+			<header class="profile-banner">
+				<span class="profile-role-badge"></span>
+				<div class="profile-hero">
+					<div class="profile-avatar"><img class="profile-avatar-image" alt="" hidden><span class="profile-avatar-initial">S</span></div>
+					<h2 id="profile-dialog-title" class="profile-hero-name"></h2>
+				</div>
+			</header>
+			<div class="profile-summary">
+				<div><strong class="profile-campus"></strong><span class="profile-summary-program"></span></div>
+				<button class="profile-edit-button" type="button" hidden>Edit profile</button>
+				<button class="profile-close dialog-close" type="button" aria-label="Close profile">&times;</button>
+			</div>
+			<div class="profile-content">
+				<nav class="profile-tabs" aria-label="Profile sections">
+					<button type="button" aria-pressed="true" data-profile-tab="about">About</button>
+					<button type="button" aria-pressed="false" data-profile-tab="info">Info</button>
+				</nav>
+				<section class="profile-tab-content" data-profile-panel="about">
+					<h3>About</h3>
+					<p class="profile-about"></p>
+					<button class="profile-change-password" type="button" hidden>Change password</button>
+				</section>
+				<section class="profile-tab-content" data-profile-panel="info" hidden>
+					<h3>Student information</h3>
+					<dl class="profile-details">
+						<div><dt>Role</dt><dd class="profile-detail-role"></dd></div>
+						<div class="profile-student-id" hidden><dt>Student ID</dt><dd class="profile-detail-id"></dd></div>
+						<div class="profile-program" hidden><dt>Program / section</dt><dd class="profile-detail-program"></dd></div>
+						<div><dt>Campus</dt><dd class="profile-info-campus"></dd></div>
+					</dl>
+				</section>
+				<aside class="profile-account-panel">
+					<h3>Account</h3>
+					<div><span>Role</span><strong class="profile-account-role"></strong></div>
+					<div class="profile-account-id"><span>Student ID</span><strong class="profile-account-student-id"></strong></div>
+					<div><span>Campus</span><strong class="profile-account-campus"></strong></div>
+				</aside>
+				<form class="profile-edit-form" hidden>
+					<h3>Edit your profile</h3>
+					<label for="profile-about-input">About
+						<textarea id="profile-about-input" name="about" rows="3" maxlength="300" placeholder="Tell classmates a little about yourself"></textarea>
+					</label>
+					<label for="profile-campus-input">Campus
+						<input id="profile-campus-input" name="campus" maxlength="80" required>
+					</label>
+					<label for="profile-program-input">Program / section
+						<input id="profile-program-input" name="program" maxlength="80" required>
+					</label>
+					<label for="profile-avatar-input">Profile photo (image, max 1 MB)
+						<input id="profile-avatar-input" name="avatar" type="file" accept="image/*">
+					</label>
+					<div class="profile-edit-actions">
+						<button class="profile-cancel-button" type="button">Cancel</button>
+						<button class="profile-save-button" type="submit">Save profile</button>
+					</div>
+					<p class="profile-edit-status" role="status" aria-live="polite"></p>
+				</form>
+			</div>
+		</div>
+	</dialog>
+
+	<dialog class="password-dialog" id="change-password-dialog" aria-labelledby="change-password-title">
+		<div class="dialog-content">
+			<div class="dialog-topline">
+				<div>
+					<p class="dialog-kicker">Student account</p>
+					<h2 id="change-password-title">Change password</h2>
+				</div>
+				<button class="password-close dialog-close" type="button" aria-label="Close password dialog">&times;</button>
+			</div>
+			<form class="change-password-form">
+				<label for="current-student-password">Current password
+					<input id="current-student-password" name="currentPassword" type="password" autocomplete="current-password" required>
+				</label>
+				<label for="new-student-password">New password
+					<input id="new-student-password" name="newPassword" type="password" autocomplete="new-password" minlength="8" required>
+				</label>
+				<label for="confirm-student-password">Confirm new password
+					<input id="confirm-student-password" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" required>
+				</label>
+				<button class="submit-button" type="submit">Save new password</button>
+				<p class="password-status form-status" role="status" aria-live="polite"></p>
+			</form>
+		</div>
+	</dialog>
+
+	<script>
+		(() => {
+			const persistValue = (key, value) => {
+					if (!key || typeof fetch !== "function") return;
+					fetch("/api/storage", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ key, value })
+					}).catch(() => undefined);
+			};
+			const deleteValue = (key) => {
+					if (!key || typeof fetch !== "function") return;
+					const query = new URLSearchParams({ key });
+					fetch(`/api/storage?${query.toString()}`, { method: "DELETE" }).catch(() => undefined);
+			};
+			const loadPersistedValues = async () => {
+					try {
+						const response = await fetch("/api/storage/all");
+						if (!response.ok) return;
+						const payload = await response.json();
+						const values = payload && typeof payload.values === "object" ? payload.values : {};
+						Object.entries(values).forEach(([key, value]) => {
+							try {
+								window.localStorage.setItem(key, typeof value === "string" ? value : JSON.stringify(value));
+							} catch {
+								// Ignore browser storage write failures and keep the app running.
+							}
+						});
+					} catch {
+						// The server can be unavailable; the browser local cache remains usable.
+					}
+			};
+			const originalSetItem = Storage.prototype.setItem;
+			const originalRemoveItem = Storage.prototype.removeItem;
+			const originalClear = Storage.prototype.clear;
+			Storage.prototype.setItem = function patchedSetItem(key, value) {
+					const result = originalSetItem.call(this, key, String(value));
+					persistValue(String(key), String(value));
+					return result;
+			};
+			Storage.prototype.removeItem = function patchedRemoveItem(key) {
+					const result = originalRemoveItem.call(this, key);
+					deleteValue(String(key));
+					return result;
+			};
+			Storage.prototype.clear = function patchedClear() {
+					const result = originalClear.call(this);
+					fetch("/api/storage/clear", { method: "DELETE" }).catch(() => undefined);
+					return result;
+			};
+			window.addEventListener("DOMContentLoaded", () => {
+					void loadPersistedValues();
+			});
+		})();
+		const signInDialog = document.querySelector("dialog");
+		const dialogTitle = document.querySelector("#dialog-title");
+		const formStatus = document.querySelector(".form-status");
+		const loginForm = document.querySelector(".login-form");
+		const adminIdInput = document.querySelector("#admin-id");
+		const dashboard = document.querySelector("#dashboard");
+		const landingPage = document.querySelector(".page");
+		const adminAccount = { id: "admin", password: "admin123" };
+		const quickActionsDialog = document.querySelector("#quick-actions-dialog");
+		const quickDetail = document.querySelector(".quick-detail");
+		const quickActionsButton = document.querySelector(".quick-trigger");
+		const assistantDialog = document.querySelector("#assistant-dialog");
+		const assistantMessages = document.querySelector(".assistant-messages");
+		const assistantForm = document.querySelector(".assistant-form");
+		const studentPasswordButton = document.querySelector(".student-password-trigger");
+		const profileButton = document.querySelector(".admin-chip");
+		const profileDialog = document.querySelector("#profile-dialog");
+		const profileChangePasswordButton = document.querySelector(".profile-change-password");
+		const focusDialog = document.querySelector("#focus-dialog");
+		const attendanceStorageKey = "sti-attendance-records";
+		const messageStorageKey = "sti-campus-messages";
+		const concernStorageKey = "sti-student-concerns";
+		const announcementStorageKey = "sti-campus-announcements";
+		const profileStorageKey = "sti-student-profiles";
+		const socialStorageKey = "sti-student-social-data";
+		const inboxDialog = document.querySelector("#inbox-dialog");
+		const inboxList = document.querySelector(".inbox-list");
+		const changePasswordDialog = document.querySelector("#change-password-dialog");
+		const changePasswordForm = document.querySelector(".change-password-form");
+		const passwordStatus = document.querySelector(".password-status");
+		const studentStorageKey = "sti-attendance-students";
+		let currentUser = null;
+		let students = [];
+		let bulkCredentialsUrl = "";
+		let attendanceRecords = [];
+		let studentConcerns = [];
+		const starterAnnouncements = [{
+			id: "announcement-library-hours",
+			title: "Library hours extended this week",
+			body: "The library will remain open later this week.",
+			updatedAt: "2026-10-24T08:00:00.000Z"
+		}];
+		let announcements = starterAnnouncements.map((announcement) => ({ ...announcement }));
+		let friendRequests = [];
+		let friendships = [];
+		let studentChats = [];
+		let studentProfiles = {};
+		let activeStudentChatId = null;
+		const starterMessages = [
+			{ id: "message-jordan", sender: "Jordan Davis", recipient: "Campus Admin", subject: "Event schedule", unread: true, thread: [{ sender: "Jordan Davis", role: "Student", text: "Could you confirm the event schedule?", sentAt: "2026-10-24T08:00:00.000Z" }] },
+			{ id: "message-mina", sender: "Mina Reyes", recipient: "Campus Admin", subject: "Attendance report", unread: false, thread: [{ sender: "Mina Reyes", role: "Student", text: "Attendance report has been submitted.", sentAt: "2026-10-24T07:30:00.000Z" }] },
+			{ id: "message-alex", sender: "Alex Cruz", recipient: "Campus Admin", subject: "Thank you", unread: false, thread: [{ sender: "Alex Cruz", role: "Student", text: "Thank you for the update.", sentAt: "2026-10-23T15:45:00.000Z" }] }
+		];
+		let messages = starterMessages.map((message) => ({ ...message, thread: [...message.thread] }));
+
+		try {
+			const savedStudents = JSON.parse(localStorage.getItem(studentStorageKey) || "[]");
+			students = Array.isArray(savedStudents) ? savedStudents : [];
+		} catch {
+			students = [];
+		}
+
+		try {
+			const savedAttendanceRecords = JSON.parse(localStorage.getItem(attendanceStorageKey) || "[]");
+			attendanceRecords = Array.isArray(savedAttendanceRecords) ? savedAttendanceRecords : [];
+		} catch {
+			attendanceRecords = [];
+		}
+
+		try {
+			const savedConcerns = JSON.parse(localStorage.getItem(concernStorageKey) || "[]");
+			studentConcerns = Array.isArray(savedConcerns) && savedConcerns.every((concern) =>
+				concern.id && concern.studentId && concern.studentName && concern.subject && concern.category
+				&& concern.description && concern.submittedAt
+				&& ["Received", "In review", "Resolved"].includes(concern.status)
+			) ? savedConcerns : [];
+		} catch {
+			studentConcerns = [];
+		}
+
+		try {
+			const savedAnnouncements = JSON.parse(localStorage.getItem(announcementStorageKey) || "null");
+			if (Array.isArray(savedAnnouncements) && savedAnnouncements.every((announcement) =>
+				announcement.id && typeof announcement.title === "string" && typeof announcement.body === "string"
+			)) {
+				announcements = savedAnnouncements;
+			}
+		} catch {
+			announcements = starterAnnouncements.map((announcement) => ({ ...announcement }));
+		}
+
+		try {
+			const savedSocialData = JSON.parse(localStorage.getItem(socialStorageKey) || "{}");
+			friendRequests = Array.isArray(savedSocialData.friendRequests)
+				? savedSocialData.friendRequests.filter((request) => request.id && request.fromId && request.toId && request.fromId !== request.toId && ["Pending", "Accepted"].includes(request.status))
+				: [];
+			friendships = Array.isArray(savedSocialData.friendships)
+				? savedSocialData.friendships.filter((friendship) => Array.isArray(friendship.studentIds) && friendship.studentIds.length === 2 && friendship.studentIds[0] !== friendship.studentIds[1])
+				: [];
+			studentChats = Array.isArray(savedSocialData.chats)
+				? savedSocialData.chats.filter((chat) => chat.id && Array.isArray(chat.studentIds) && chat.studentIds.length === 2 && Array.isArray(chat.messages))
+				: [];
+		} catch {
+			friendRequests = [];
+			friendships = [];
+			studentChats = [];
+		}
+
+		try {
+			const savedProfiles = JSON.parse(localStorage.getItem(profileStorageKey) || "{}");
+			studentProfiles = savedProfiles && typeof savedProfiles === "object" && !Array.isArray(savedProfiles) ? savedProfiles : {};
+		} catch {
+			studentProfiles = {};
+		}
+
+		try {
+			const savedMessages = JSON.parse(localStorage.getItem(messageStorageKey) || "null");
+			if (Array.isArray(savedMessages) && savedMessages.every((message) => message.id && message.sender && Array.isArray(message.thread))) {
+				messages = savedMessages;
+			}
+		} catch {
+			messages = starterMessages.map((message) => ({ ...message, thread: [...message.thread] }));
+		}
+
+		const quickActionViews = {
+			register: {
+				title: "Register a student",
+				description: "Add a student account with their grade and strand. Set a password or leave it blank to generate one.",
+				form: '<label class="full">Student name<input name="studentName" autocomplete="name" placeholder="Full name" required></label><label>Student ID<input name="studentId" autocomplete="off" placeholder="e.g. STI-2048" required></label><label>Grade<input name="grade" placeholder="e.g. 11 or 12" required></label><label>Strand<input name="strand" placeholder="e.g. STEM or ICT" required></label><label class="full">Program / section (optional)<input name="program" placeholder="e.g. STEM 11A"></label><label class="full">Custom password (optional)<input name="studentPassword" type="password" autocomplete="new-password" minlength="8" placeholder="At least 8 characters; blank generates one"></label><button class="quick-submit" type="submit">Register student</button>'
+			},
+			"bulk-register": {
+				title: "Mass register students",
+				description: "Paste CSV rows with Student ID, Name, Grade, Strand, and an optional Password. Leave Password blank to generate one. Duplicate IDs and invalid rows are skipped.",
+				form: '<label class="full">Student records (CSV)<textarea name="studentCsv" rows="8" required placeholder="Student ID,Name,Grade,Strand,Password&#10;STI-2048,Jordan Davis,11,STEM,&#10;STI-2049,Mina Reyes,12,ICT,StudentPass123"></textarea></label><p class="quick-help">Use the first row as the column header. Passwords must be at least 8 characters. Generated passwords are included in the credentials download.</p><button class="quick-template" type="button">Download CSV template</button><button class="quick-submit" type="submit">Import students</button><a class="quick-download" hidden>Download credentials CSV</a>'
+			},
+			view: {
+				title: "View student",
+				description: "Look up a student saved in this browser.",
+				form: '<label class="full">Student ID<input name="studentId" placeholder="Enter student ID" required></label><button class="quick-submit" type="submit">Find student</button>'
+			},
+			"delete-student": {
+				title: "Delete student account",
+				description: "Permanently remove this student account from this browser. Existing attendance records will be kept.",
+				form: '<label class="full">Student ID<input name="studentId" placeholder="Enter student ID" required></label><label class="quick-confirm"><input name="confirmDelete" type="checkbox" required> I understand this will delete the student account.</label><button class="quick-submit" type="submit">Delete student account</button>'
+			},
+			"reset-password": {
+				title: "Reset student password",
+				description: "Generate a new password for a student who cannot sign in.",
+				form: '<label class="full">Student ID<input name="studentId" placeholder="Enter student ID" required></label><button class="quick-submit" type="submit">Generate new password</button>'
+			},
+			attendance: {
+				title: "Mark attendance",
+				description: "Record an attendance status for a registered student.",
+				form: '<label>Student ID<input name="studentId" placeholder="Enter student ID" required></label><label>Date<input name="attendanceDate" type="date" required></label><label class="full">Status<select name="status"><option>Present</option><option>Late</option><option>Absent</option></select></label><button class="quick-submit" type="submit">Save attendance</button>'
+			},
+			reports: {
+				title: "Generate reports",
+				description: "Download a CSV summary of students and attendance saved in this browser.",
+				form: '<label class="full">Report type<select name="reportType"><option value="attendance">Attendance report</option><option value="students">Student register</option></select></label><button class="quick-submit" type="submit">Generate CSV report</button>'
+			}
+		};
+
+		function showQuickAction(actionName) {
+			if (bulkCredentialsUrl) {
+				URL.revokeObjectURL(bulkCredentialsUrl);
+				bulkCredentialsUrl = "";
+			}
+			const action = quickActionViews[actionName];
+			if (!action) return;
+			document.querySelectorAll(".quick-option").forEach((button) => {
+				button.setAttribute("aria-pressed", String(button.dataset.action === actionName));
+			});
+			quickDetail.innerHTML = `<h3>${action.title}</h3><p>${action.description}</p><form class="quick-form" data-form-action="${actionName}">${action.form}<p class="quick-result" role="status" aria-live="polite"></p></form>`;
+			quickDetail.querySelector("input, select, textarea")?.focus();
+		}
+
+		function setQuickResult(form, message) {
+			form.querySelector(".quick-result").textContent = message;
+		}
+
+		function parseCsvRows(csvText) {
+			const rows = [];
+			let row = [];
+			let field = "";
+			let quoted = false;
+
+			for (let index = 0; index < csvText.length; index += 1) {
+				const character = csvText[index];
+				if (character === '"') {
+					if (quoted && csvText[index + 1] === '"') {
+						field += '"';
+						index += 1;
+					} else if (!quoted && field.length === 0) {
+						quoted = true;
+					} else if (quoted) {
+						quoted = false;
+					} else {
+						throw new Error("A CSV field contains an unexpected quote.");
+					}
+				} else if (character === "," && !quoted) {
+					row.push(field.trim());
+					field = "";
+				} else if ((character === "\n" || character === "\r") && !quoted) {
+					row.push(field.trim());
+					if (row.some((value) => value !== "")) rows.push(row);
+					row = [];
+					field = "";
+					if (character === "\r" && csvText[index + 1] === "\n") index += 1;
+				} else {
+					field += character;
+				}
+			}
+
+			if (quoted) throw new Error("A CSV field has an unclosed quote.");
+			row.push(field.trim());
+			if (row.some((value) => value !== "")) rows.push(row);
+			return rows;
+		}
+
+		function csvContent(rows) {
+			return rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\r\n");
+		}
+
+		function downloadCsv(rows, filename) {
+			const url = URL.createObjectURL(new Blob([csvContent(rows)], { type: "text/csv;charset=utf-8" }));
+			const download = document.createElement("a");
+			download.href = url;
+			download.download = filename;
+			download.click();
+			window.setTimeout(() => URL.revokeObjectURL(url), 60000);
+		}
+
+		function renderStudentRoster() {
+			const gradeFilter = document.querySelector("#student-roster-grade");
+			const strandFilter = document.querySelector("#student-roster-strand");
+			const previousGrade = gradeFilter.value;
+			const previousStrand = strandFilter.value;
+			const setFilterOptions = (select, allLabel, values, previousValue) => {
+				select.replaceChildren(new Option(allLabel, ""));
+				values.forEach((value) => select.add(new Option(value, value)));
+				select.value = values.includes(previousValue) ? previousValue : "";
+			};
+			const grades = [...new Set(students.map((student) => student.grade || "Not set"))].sort((first, second) => first.localeCompare(second, undefined, { numeric: true, sensitivity: "base" }));
+			const strands = [...new Set(students.map((student) => student.strand || "Not set"))].sort((first, second) => first.localeCompare(second, undefined, { sensitivity: "base" }));
+			setFilterOptions(gradeFilter, "All grades", grades, previousGrade);
+			setFilterOptions(strandFilter, "All strands", strands, previousStrand);
+
+			const query = document.querySelector("#student-roster-search").value.trim().toLocaleLowerCase();
+			const matches = students
+				.filter((student) => {
+					const grade = student.grade || "Not set";
+					const strand = student.strand || "Not set";
+					return (!query || `${student.name} ${student.id} ${grade} ${strand}`.toLocaleLowerCase().includes(query))
+						&& (!gradeFilter.value || grade === gradeFilter.value)
+						&& (!strandFilter.value || strand === strandFilter.value);
+				})
+				.sort((first, second) => first.name.localeCompare(second.name, undefined, { sensitivity: "base" }) || first.id.localeCompare(second.id, undefined, { sensitivity: "base" }));
+			const roster = document.querySelector(".student-roster-list");
+			roster.replaceChildren();
+			document.querySelector(".registered-student-count").textContent = `${students.length} registered`;
+
+			if (matches.length === 0) {
+				const row = document.createElement("tr");
+				const cell = document.createElement("td");
+				cell.colSpan = 4;
+				cell.className = "student-roster-empty";
+				cell.textContent = students.length ? "No students match these filters." : "No students are registered yet.";
+				row.append(cell);
+				roster.append(row);
+			} else {
+				matches.forEach((student) => {
+					const row = document.createElement("tr");
+					[student.name, student.id, student.grade || "Not set", student.strand || "Not set"].forEach((value) => {
+						const cell = document.createElement("td");
+						cell.textContent = value;
+						row.append(cell);
+					});
+					roster.append(row);
+				});
+			}
+
+			document.querySelector(".student-roster-status").textContent = `Showing ${matches.length} of ${students.length} student${students.length === 1 ? "" : "s"}.`;
+		}
+
+		function generateStudentPassword() {
+			if (!window.crypto?.getRandomValues) {
+				throw new Error("Secure random password generation is not supported by this browser.");
+			}
+
+			const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+			const limit = Math.floor(256 / alphabet.length) * alphabet.length;
+			let password = "";
+
+			while (password.length < 14) {
+				const randomBytes = window.crypto.getRandomValues(new Uint8Array(32));
+				for (const byte of randomBytes) {
+					if (byte >= limit) continue;
+					password += alphabet[byte % alphabet.length];
+					if (password.length === 14) break;
+				}
+			}
+
+			return password;
+		}
+
+		function localDateKey(date) {
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const day = String(date.getDate()).padStart(2, "0");
+			return `${year}-${month}-${day}`;
+		}
+
+		function displayDate(dateKey) {
+			if (!dateKey) return "--";
+			const [year, month, day] = dateKey.split("-").map(Number);
+			return new Date(year, month - 1, day).toLocaleDateString(undefined, { month: "2-digit", day: "2-digit", year: "numeric" });
+		}
+
+		function displayTime(timestamp) {
+			return timestamp ? new Date(timestamp).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" }) : "--";
+		}
+
+		function saveAttendanceRecords() {
+			localStorage.setItem(attendanceStorageKey, JSON.stringify(attendanceRecords));
+		}
+
+		function renderStudentConcerns() {
+			const list = document.querySelector(".concern-list");
+			const visibleConcerns = currentUser?.role === "Admin"
+				? studentConcerns
+				: studentConcerns.filter((concern) => concern.studentId === currentUser?.id);
+			list.replaceChildren();
+			document.querySelector(".reports-count").textContent = `${visibleConcerns.length} ${visibleConcerns.length === 1 ? "report" : "reports"}`;
+
+			if (visibleConcerns.length === 0) {
+				const empty = document.createElement("p");
+				empty.className = "concern-empty";
+				empty.textContent = currentUser?.role === "Admin"
+					? "No student concerns have been submitted yet."
+					: "You haven’t submitted any concerns yet. Use the form above to share one.";
+				list.append(empty);
+				return;
+			}
+
+			[...visibleConcerns].sort((first, second) => second.submittedAt.localeCompare(first.submittedAt)).forEach((concern) => {
+				const card = document.createElement("article");
+				card.className = "concern-card";
+				const heading = document.createElement("div");
+				heading.className = "concern-card-heading";
+				const titleGroup = document.createElement("div");
+				const subject = document.createElement("h3");
+				subject.textContent = concern.subject;
+				const category = document.createElement("span");
+				category.className = "concern-category";
+				category.textContent = concern.category;
+				titleGroup.append(subject, category);
+				const statusGroup = document.createElement("div");
+				statusGroup.className = "concern-status-group";
+				const status = document.createElement("span");
+				status.className = `concern-status ${concern.status.toLowerCase().replaceAll(" ", "-")}`;
+				status.textContent = concern.status;
+				if (currentUser?.role === "Admin") {
+					const statusSelect = document.createElement("select");
+					statusSelect.className = "concern-status-select";
+					statusSelect.dataset.concernId = concern.id;
+					statusSelect.setAttribute("aria-label", `Update status for ${concern.subject}`);
+					["Received", "In review", "Resolved"].forEach((optionLabel) => {
+						const option = document.createElement("option");
+						option.value = optionLabel;
+						option.textContent = optionLabel;
+						statusSelect.append(option);
+					});
+					statusSelect.value = concern.status;
+					statusGroup.append(status, statusSelect);
+				} else {
+					statusGroup.append(status);
+				}
+				heading.append(titleGroup, statusGroup);
+
+				const description = document.createElement("p");
+				description.className = "concern-description";
+				description.textContent = concern.description;
+				const metadata = document.createElement("p");
+				metadata.className = "concern-metadata";
+				const submittedAt = new Date(concern.submittedAt);
+				metadata.textContent = currentUser?.role === "Admin"
+					? `${concern.studentName} · ${concern.studentId} · ${submittedAt.toLocaleString()}`
+					: `Submitted ${submittedAt.toLocaleString()}`;
+				card.dataset.concernId = concern.id;
+				card.append(heading, description, metadata);
+				if (concern.adminResponse) {
+					const response = document.createElement("section");
+					response.className = "concern-admin-response";
+					const responseHeading = document.createElement("strong");
+					responseHeading.textContent = "Admin update";
+					const responseText = document.createElement("p");
+					responseText.textContent = concern.adminResponse;
+					response.append(responseHeading, responseText);
+					if (concern.respondedAt) {
+						const responseDate = document.createElement("time");
+						responseDate.dateTime = concern.respondedAt;
+						responseDate.textContent = new Date(concern.respondedAt).toLocaleString();
+						response.append(responseDate);
+					}
+					card.append(response);
+				} else if (currentUser?.role === "Student") {
+					const waiting = document.createElement("p");
+					waiting.className = "concern-response-waiting";
+					waiting.textContent = "No admin update yet.";
+					card.append(waiting);
+				}
+				if (currentUser?.role === "Admin") {
+					const responseForm = document.createElement("form");
+					responseForm.className = "concern-response-form";
+					const responseLabel = document.createElement("label");
+					responseLabel.textContent = concern.adminResponse ? "Update for student" : "Reply to student";
+					const responseInput = document.createElement("textarea");
+					responseInput.name = "adminResponse";
+					responseInput.rows = 2;
+					responseInput.maxLength = 500;
+					responseInput.placeholder = "Example: We’re looking into this and will follow up soon.";
+					responseInput.value = concern.adminResponse || "";
+					responseInput.setAttribute("aria-label", `${responseLabel.textContent}: ${concern.subject}`);
+					const saveResponse = document.createElement("button");
+					saveResponse.type = "submit";
+					saveResponse.className = "concern-response-submit";
+					saveResponse.textContent = concern.adminResponse ? "Update reply" : "Send reply";
+					const responseStatus = document.createElement("p");
+					responseStatus.className = "concern-response-form-status";
+					responseStatus.setAttribute("role", "status");
+					responseForm.append(responseLabel, responseInput, saveResponse, responseStatus);
+					card.append(responseForm);
+				}
+				list.append(card);
+			});
+		}
+
+		function renderAnnouncements() {
+			const list = document.querySelector(".announcement-list");
+			list.replaceChildren();
+			if (announcements.length === 0) {
+				const empty = document.createElement("p");
+				empty.className = "announcement-empty";
+				empty.textContent = "No campus announcements yet.";
+				list.append(empty);
+				return;
+			}
+
+			[...announcements].sort((first, second) => (second.updatedAt || "").localeCompare(first.updatedAt || "")).forEach((announcement) => {
+				const item = document.createElement("div");
+				item.className = "announcement-item";
+				const open = document.createElement("button");
+				open.type = "button";
+				open.className = "list-item announcement-open";
+				open.dataset.announcementId = announcement.id;
+				const copy = document.createElement("span");
+				copy.className = "item-copy";
+				const title = document.createElement("strong");
+				title.textContent = announcement.title;
+				const body = document.createElement("span");
+				body.textContent = announcement.body;
+				copy.append(title, body);
+				open.append(copy);
+				item.append(open);
+
+				if (currentUser?.role === "Admin") {
+					const edit = document.createElement("button");
+					edit.type = "button";
+					edit.className = "announcement-edit";
+					edit.dataset.announcementId = announcement.id;
+					edit.textContent = "Edit";
+					edit.setAttribute("aria-label", `Edit announcement: ${announcement.title}`);
+					item.append(edit);
+				}
+				if (announcement.updatedAt) {
+					const date = document.createElement("time");
+					date.className = "announcement-date";
+					date.dateTime = announcement.updatedAt;
+					date.textContent = `Updated ${new Date(announcement.updatedAt).toLocaleString()}`;
+					item.append(date);
+				}
+				list.append(item);
+			});
+		}
+
+		function addAssistantMessage(text, sender) {
+			const message = document.createElement("p");
+			message.className = `assistant-message ${sender}`;
+			message.textContent = text;
+			assistantMessages.append(message);
+			assistantMessages.scrollTop = assistantMessages.scrollHeight;
+		}
+
+		function resetAssistantConversation() {
+			assistantMessages.replaceChildren();
+			addAssistantMessage(`Hi ${currentUser.name}! I can help you find campus announcements and explain portal features. Try asking about attendance, announcements, or ${currentUser.role === "Admin" ? "admin tools" : "student support"}.`, "assistant");
+		}
+
+		function getAssistantReply(question) {
+			const query = question.toLowerCase();
+			const isAdmin = currentUser?.role === "Admin";
+
+			if (query.includes("announcement") || query.includes("notification") || query.includes("campus news")) {
+				if (announcements.length === 0) return "There are no campus announcements right now. Admins can publish one from Notifications.";
+				const latest = [...announcements]
+					.sort((first, second) => (second.updatedAt || "").localeCompare(first.updatedAt || ""))
+					.slice(0, 3)
+					.map((announcement) => `“${announcement.title}” — ${announcement.body}`);
+				return `Latest campus announcement${latest.length === 1 ? "" : "s"}: ${latest.join(" | ")}${isAdmin ? " To publish or edit one, open Notifications and choose New announcement." : ""}`;
+			}
+
+			if (query.includes("attendance") || query.includes("time in") || query.includes("time out") || query.includes("present")) {
+				if (isAdmin) {
+					const today = localDateKey(new Date());
+					const todayRecords = attendanceRecords.filter((record) => record.date === today);
+					const present = todayRecords.filter((record) => record.status === "Present").length;
+					const absent = todayRecords.filter((record) => record.status === "Absent").length;
+					const late = todayRecords.filter((record) => record.status === "Late").length;
+					return `Today’s saved records: ${present} present, ${absent} absent, and ${late} late (${todayRecords.length} total). Use Quick actions → Mark attendance to update a student record, or Generate reports to download a report.`;
+				}
+				const record = attendanceRecords.find((entry) => entry.id === currentUser.id && entry.date === localDateKey(new Date()));
+				return record
+					? `Your attendance today is ${record.status.toLowerCase()}${record.timeIn ? `; time in: ${displayTime(record.timeIn)}` : ""}${record.timeOut ? `; time out: ${displayTime(record.timeOut)}` : ""}. You can time in once per day and time out after timing in.`
+					: "You have not timed in today. Open Attendance and choose Time in to record your presence. You can time out once you have timed in.";
+			}
+
+			if (query.includes("concern") || query.includes("report") || query.includes("support")) {
+				if (isAdmin) {
+					const unresolved = studentConcerns.filter((concern) => concern.status !== "Resolved").length;
+					return `There ${unresolved === 1 ? "is" : "are"} ${unresolved} student concern${unresolved === 1 ? "" : "s"} not marked resolved. Open Student reports to review concerns, update their status, and reply to students.`;
+				}
+				const ownConcerns = studentConcerns.filter((concern) => concern.studentId === currentUser.id);
+				if (ownConcerns.length === 0) return "You have not submitted a concern yet. Open Student reports to send one and follow its status or an administrator’s reply.";
+				return `You have ${ownConcerns.length} submitted concern${ownConcerns.length === 1 ? "" : "s"}: ${ownConcerns.map((concern) => `${concern.subject} (${concern.status})`).join("; ")}. Open Student reports to see replies or submit another concern.`;
+			}
+
+			if (query.includes("admin") || query.includes("publish") || query.includes("register") || query.includes("quick action") || query.includes("student account")) {
+				return isAdmin
+					? "Use Quick actions for student registration, account management, attendance updates, and reports. To publish a campus announcement, open Notifications and choose New announcement."
+					: "Admin tools are only available to campus administrators. As a student, you can check attendance, read announcements, message the campus, submit concerns, and connect with classmates.";
+			}
+
+			if (query.includes("friend") || query.includes("chat") || query.includes("message")) {
+				return isAdmin
+					? "Open Messages to read and reply to campus conversations. Student-to-student Friends & chat is available from student accounts."
+					: "Open Friends & chat to find classmates and message accepted friends. Open Messages to view campus conversations.";
+			}
+
+			if (query.includes("event") || query.includes("activity")) {
+				return "Open Ongoing & upcoming activities on the overview to see the events listed for this campus portal.";
+			}
+
+			return isAdmin
+				? "I can help with announcements, attendance, student concerns, messages, and admin tools. Ask about one of those topics, or open Quick actions for account and report tools."
+				: "I can help with announcements, attendance, student concerns, messages, and friends & chat. Ask about one of those topics, or open the matching section from the dashboard.";
+		}
+
+		function updateStudentAttendancePanel() {
+			const panel = document.querySelector(".student-attendance");
+			const record = currentUser?.role === "Student"
+				? attendanceRecords.find((entry) => entry.id === currentUser.id && entry.date === localDateKey(new Date()))
+				: null;
+			panel.hidden = currentUser?.role !== "Student";
+			panel.querySelector(".student-attendance-status").textContent = record?.status || "Not timed in";
+			panel.querySelector(".student-time-in").textContent = displayTime(record?.timeIn);
+			panel.querySelector(".student-time-out").textContent = displayTime(record?.timeOut);
+			panel.querySelector(".time-in-button").disabled = Boolean(record);
+			panel.querySelector(".time-out-button").disabled = !record?.timeIn || Boolean(record.timeOut);
+			panel.querySelector(".student-attendance-result").textContent = record
+				? record.status === "Absent"
+					? "Your attendance is marked absent by an admin."
+					: record.timeOut
+						? "Your attendance for today is complete."
+						: "You are timed in. Remember to time out before you leave."
+				: "";
+		}
+
+		function updateAttendanceSummary() {
+			const todayKey = localDateKey(new Date());
+			const todayRecords = attendanceRecords.filter((record) => record.date === todayKey);
+			const countStatus = (status) => todayRecords.filter((record) => record.status === status).length;
+			const presentCount = countStatus("Present");
+			const absentCount = countStatus("Absent");
+			const lateCount = countStatus("Late");
+			const recentRecord = [...attendanceRecords].sort((first, second) => second.date.localeCompare(first.date))[0];
+
+			document.querySelector("#recent-attendance-date").textContent = recentRecord ? displayDate(recentRecord.date) : "--";
+			document.querySelector("#present-today-count").textContent = presentCount;
+			document.querySelector("#absent-today-count").textContent = absentCount;
+			document.querySelector("#today-date").textContent = displayDate(todayKey);
+			document.querySelector("#total-present-count").textContent = presentCount;
+			document.querySelector("#total-absent-count").textContent = absentCount;
+			document.querySelector("#total-late-count").textContent = lateCount;
+			document.querySelector("#total-students-count").textContent = presentCount + absentCount + lateCount;
+		}
+
+		function saveMessages() {
+			try {
+				localStorage.setItem(messageStorageKey, JSON.stringify(messages));
+				return true;
+			} catch {
+				return false;
+			}
+		}
+
+		function latestMessage(message) {
+			return message.thread[message.thread.length - 1];
+		}
+
+		function createMessageButton(message) {
+			const button = document.createElement("button");
+			button.className = "list-item message-open";
+			button.type = "button";
+			button.dataset.messageId = message.id;
+
+			const icon = document.createElement("span");
+			icon.className = "item-icon";
+			icon.setAttribute("aria-hidden", "true");
+			icon.textContent = message.sender.split(/\s+/).map((part) => part.charAt(0)).join("").slice(0, 2).toUpperCase();
+
+			const copy = document.createElement("span");
+			copy.className = "item-copy";
+			const sender = document.createElement("strong");
+			sender.textContent = message.sender === currentUser?.name ? `To ${message.recipient}` : message.sender;
+			const latest = latestMessage(message);
+			const preview = document.createElement("span");
+			preview.textContent = latest?.text || message.subject;
+			copy.append(sender, preview);
+			button.append(icon, copy);
+
+			if (message.unread && message.sender !== currentUser?.name) {
+				const unread = document.createElement("span");
+				unread.className = "message-unread";
+				unread.setAttribute("aria-label", "Unread");
+				button.append(unread);
+			}
+
+			return button;
+		}
+
+		function renderMessages() {
+			inboxList.replaceChildren(...messages.map(createMessageButton));
+			if (messages.length === 0) {
+				const empty = document.createElement("p");
+				empty.className = "inbox-empty";
+				empty.textContent = "No messages yet. Use the form to start a conversation.";
+				inboxList.append(empty);
+			}
+		}
+
+		function studentProfile(studentId) {
+			const profile = studentProfiles[studentId];
+			if (!profile || typeof profile !== "object") return { about: "", campus: "STI College Ormoc", avatar: "" };
+			return {
+				about: typeof profile.about === "string" ? profile.about : "",
+				campus: typeof profile.campus === "string" && profile.campus ? profile.campus : "STI College Ormoc",
+				avatar: typeof profile.avatar === "string" && /^data:image\/(png|jpeg|gif|webp);base64,/i.test(profile.avatar) ? profile.avatar : ""
+			};
+		}
+
+		function getFriendIds(studentId = currentUser?.id) {
+			return friendships
+				.filter((friendship) => friendship.studentIds.includes(studentId))
+				.map((friendship) => friendship.studentIds.find((id) => id !== studentId))
+				.filter((id) => students.some((student) => student.id === id));
+		}
+
+		function studentChatId(firstId, secondId) {
+			return [firstId, secondId].sort((first, second) => first.localeCompare(second)).join("::");
+		}
+
+		function saveStudentSocialData() {
+			try {
+				localStorage.setItem(socialStorageKey, JSON.stringify({ friendRequests, friendships, chats: studentChats }));
+				return true;
+			} catch {
+				return false;
+			}
+		}
+
+		function createStudentActionButton(label, action, studentId, className = "") {
+			const button = document.createElement("button");
+			button.type = "button";
+			button.className = `student-action-button ${className}`.trim();
+			button.dataset.studentAction = action;
+			button.dataset.studentId = studentId;
+			button.textContent = label;
+			return button;
+		}
+
+		function setStudentAvatar(element, student) {
+			const profile = studentProfile(student.id);
+			element.replaceChildren();
+			if (profile.avatar) {
+				const image = document.createElement("img");
+				image.src = profile.avatar;
+				image.alt = "";
+				element.append(image);
+				return;
+			}
+			element.textContent = student.name.trim().charAt(0).toUpperCase();
+		}
+
+		function renderStudentSocial() {
+			if (currentUser?.role !== "Student") return;
+			const query = document.querySelector("#friend-search").value.trim().toLowerCase();
+			const directory = document.querySelector(".student-directory");
+			const requestList = document.querySelector(".friend-request-list");
+			const friendList = document.querySelector(".friend-list");
+			const acceptedIds = getFriendIds();
+			const incoming = friendRequests.filter((request) => request.toId === currentUser.id && request.status === "Pending");
+			directory.replaceChildren();
+			requestList.replaceChildren();
+			friendList.replaceChildren();
+			document.querySelector(".friends-count").textContent = `${acceptedIds.length} ${acceptedIds.length === 1 ? "friend" : "friends"}`;
+			document.querySelector(".request-count").textContent = incoming.length ? `(${incoming.length})` : "";
+
+			const matches = students.filter((student) =>
+				student.id !== currentUser.id
+				&& `${student.name} ${student.id} ${student.program}`.toLowerCase().includes(query)
+			);
+			matches.forEach((student) => {
+				const card = document.createElement("article");
+				card.className = "student-directory-card";
+				const avatar = document.createElement("span");
+				avatar.className = "friend-avatar";
+				setStudentAvatar(avatar, student);
+				const details = document.createElement("span");
+				details.className = "friend-details";
+				const name = document.createElement("strong");
+				name.textContent = student.name;
+				const program = document.createElement("span");
+				program.textContent = `${student.program} · ${student.id}`;
+				details.append(name, program);
+				card.append(avatar, details, createStudentActionButton("View", "profile", student.id));
+				if (acceptedIds.includes(student.id)) {
+					card.append(createStudentActionButton("Chat", "chat", student.id, "primary"));
+				} else {
+					const requestSent = friendRequests.some((request) =>
+						request.fromId === currentUser.id && request.toId === student.id && request.status === "Pending"
+					);
+					const receivedRequest = friendRequests.some((request) =>
+						request.fromId === student.id && request.toId === currentUser.id && request.status === "Pending"
+					);
+					card.append(createStudentActionButton(
+						requestSent ? "Requested" : receivedRequest ? "Respond" : "Add friend",
+						requestSent ? "pending" : receivedRequest ? "requests" : "add",
+						student.id,
+						requestSent ? "" : "primary"
+					));
+				}
+				directory.append(card);
+			});
+			if (matches.length === 0) {
+				const empty = document.createElement("p");
+				empty.className = "social-empty";
+				empty.textContent = query ? "No students match your search." : "No other students are registered in this browser yet.";
+				directory.append(empty);
+			}
+
+			incoming.forEach((request) => {
+				const sender = students.find((student) => student.id === request.fromId);
+				if (!sender) return;
+				const card = document.createElement("div");
+				card.className = "friend-request-item";
+				const name = document.createElement("strong");
+				name.textContent = sender.name;
+				const actions = document.createElement("span");
+				actions.append(
+					createStudentActionButton("Accept", "accept-request", sender.id, "primary"),
+					createStudentActionButton("Decline", "decline-request", sender.id)
+				);
+				card.append(name, actions);
+				requestList.append(card);
+			});
+			if (incoming.length === 0) {
+				const empty = document.createElement("p");
+				empty.className = "social-empty";
+				empty.textContent = "No pending requests.";
+				requestList.append(empty);
+			}
+
+			acceptedIds.forEach((friendId) => {
+				const friend = students.find((student) => student.id === friendId);
+				if (!friend) return;
+				const button = createStudentActionButton("", "chat", friend.id, "friend-chat-link");
+				const avatar = document.createElement("span");
+				avatar.className = "friend-avatar";
+				setStudentAvatar(avatar, friend);
+				const name = document.createElement("strong");
+				name.textContent = friend.name;
+				const program = document.createElement("span");
+				program.textContent = friend.program;
+				button.append(avatar, name, program);
+				friendList.append(button);
+			});
+			if (acceptedIds.length === 0) {
+				const empty = document.createElement("p");
+				empty.className = "social-empty";
+				empty.textContent = "Your accepted friends will appear here.";
+				friendList.append(empty);
+			}
+		}
+
+		function openStudentChat(friendId) {
+			if (!getFriendIds().includes(friendId)) return;
+			const friend = students.find((student) => student.id === friendId);
+			if (!friend) return;
+			activeStudentChatId = studentChatId(currentUser.id, friendId);
+			if (!studentChats.some((chat) => chat.id === activeStudentChatId)) {
+				studentChats.push({ id: activeStudentChatId, studentIds: [currentUser.id, friendId], messages: [] });
+				if (!saveStudentSocialData()) {
+					studentChats.pop();
+					document.querySelector(".friends-status").textContent = "Unable to open the conversation because browser storage is unavailable.";
+					activeStudentChatId = null;
+					return;
+				}
+			}
+			document.querySelector(".student-chat-empty").hidden = true;
+			document.querySelector(".student-chat").hidden = false;
+			document.querySelector(".student-chat-name").textContent = friend.name;
+			document.querySelector(".student-chat-avatar").textContent = friend.name.trim().charAt(0).toUpperCase();
+			document.querySelector(".student-chat-form").reset();
+			document.querySelector(".chat-attachment-name").textContent = "No file selected · max 2 MB";
+			renderStudentChat();
+		}
+
+		function renderStudentChat() {
+			const chat = studentChats.find((entry) => entry.id === activeStudentChatId);
+			const thread = document.querySelector(".student-chat-thread");
+			thread.replaceChildren();
+			if (!chat) return;
+			chat.messages.forEach((message) => {
+				const bubble = document.createElement("article");
+				bubble.className = `student-chat-message${message.senderId === currentUser.id ? " mine" : ""}`;
+				const sender = students.find((student) => student.id === message.senderId);
+				const heading = document.createElement("strong");
+				heading.textContent = message.senderId === currentUser.id ? "You" : sender?.name || "Student";
+				bubble.append(heading);
+				if (message.text) {
+					const text = document.createElement("p");
+					text.textContent = message.text;
+					bubble.append(text);
+				}
+				if (message.attachment && typeof message.attachment.name === "string"
+					&& typeof message.attachment.dataUrl === "string"
+					&& /^data:(image\/(png|jpeg|gif|webp)|application\/pdf|text\/plain|application\/msword|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document);base64,/i.test(message.attachment.dataUrl)) {
+					const attachment = document.createElement("a");
+					attachment.className = "chat-attachment";
+					attachment.href = message.attachment.dataUrl;
+					attachment.download = message.attachment.name;
+					attachment.textContent = `Download ${message.attachment.name}`;
+					bubble.append(attachment);
+				} else if (message.attachment) {
+					const unavailable = document.createElement("span");
+					unavailable.className = "chat-attachment";
+					unavailable.textContent = "Attachment unavailable";
+					bubble.append(unavailable);
+				}
+				const time = document.createElement("time");
+				time.textContent = new Date(message.sentAt).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+				bubble.append(time);
+				thread.append(bubble);
+			});
+			thread.scrollTop = thread.scrollHeight;
+		}
+
+		function updateProfileView(student) {
+			const profile = studentProfile(student.id);
+			document.querySelector(".profile-hero-name").textContent = student.name;
+			document.querySelector(".profile-campus").textContent = profile.campus;
+			document.querySelector(".profile-summary-program").textContent = student.program || "Program not set";
+			document.querySelector(".profile-detail-role").textContent = "Student";
+			document.querySelector(".profile-detail-id").textContent = student.id;
+			document.querySelector(".profile-detail-program").textContent = student.program || "Program not set";
+			document.querySelector(".profile-info-campus").textContent = profile.campus;
+			document.querySelector(".profile-about").textContent = profile.about || "There is currently no information about this student.";
+			document.querySelector(".profile-role-badge").textContent = "Student";
+			document.querySelector(".profile-student-id").hidden = false;
+			document.querySelector(".profile-program").hidden = false;
+			document.querySelector(".profile-account-role").textContent = "Student";
+			document.querySelector(".profile-account-student-id").textContent = student.id;
+			document.querySelector(".profile-account-campus").textContent = profile.campus;
+			document.querySelector(".profile-account-id").hidden = false;
+			const avatarImage = document.querySelector(".profile-avatar-image");
+			const avatarInitial = document.querySelector(".profile-avatar-initial");
+			avatarImage.hidden = !profile.avatar;
+			avatarImage.src = profile.avatar || "";
+			avatarInitial.hidden = Boolean(profile.avatar);
+			avatarInitial.textContent = student.name.trim().charAt(0).toUpperCase();
+			if (student.id === currentUser?.id) {
+				const chipImage = document.querySelector(".admin-avatar-photo");
+				const chipInitial = document.querySelector(".admin-avatar-initial");
+				chipImage.hidden = !profile.avatar;
+				chipImage.src = profile.avatar || "";
+				chipInitial.hidden = Boolean(profile.avatar);
+				chipInitial.textContent = student.name.trim().charAt(0).toUpperCase();
+			}
+		}
+
+		function readFileAsDataUrl(file) {
+			return new Promise((resolve, reject) => {
+				const reader = new FileReader();
+				reader.addEventListener("load", () => resolve(reader.result));
+				reader.addEventListener("error", () => reject(new Error("The selected file could not be read.")));
+				reader.readAsDataURL(file);
+			});
+		}
+
+		function renderMessageThread(message) {
+			const thread = document.querySelector(".message-thread");
+			thread.replaceChildren(...message.thread.map((entry) => {
+				const item = document.createElement("article");
+				item.className = "thread-entry";
+				const heading = document.createElement("strong");
+				heading.textContent = `${entry.sender} · ${entry.role}`;
+				const text = document.createElement("p");
+				text.textContent = entry.text;
+				const time = document.createElement("time");
+				time.dateTime = entry.sentAt;
+				time.textContent = new Date(entry.sentAt).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+				item.append(heading, text, time);
+				return item;
+			}));
+		}
+
+		function openMessage(messageId, returnToInbox) {
+			const message = messages.find((entry) => entry.id === messageId);
+			if (!message) return;
+
+			const wasUnread = message.unread;
+			message.unread = false;
+			if (wasUnread && !saveMessages()) {
+				message.unread = true;
+				document.querySelector(".message-status").textContent = "This message could not be marked as read because browser storage is unavailable.";
+			} else {
+				document.querySelector(".message-status").textContent = "";
+			}
+			renderMessages();
+
+			document.querySelector("#focus-dialog-kicker").textContent = "Message conversation";
+			document.querySelector("#focus-dialog-title").textContent = message.subject;
+			document.querySelector("#focus-dialog-date").hidden = true;
+			document.querySelector("#focus-dialog-date").textContent = "";
+			const conversationPartner = message.sender === currentUser?.name ? message.recipient : message.sender;
+			document.querySelector("#focus-dialog-description").textContent = `Conversation with ${conversationPartner}`;
+			document.querySelector("#focus-dialog-status").hidden = true;
+			document.querySelector("#focus-dialog-status").textContent = "";
+			renderMessageThread(message);
+			const replyForm = document.querySelector(".message-reply-form");
+			replyForm.dataset.messageId = message.id;
+			replyForm.reset();
+			document.querySelector(".message-thread-panel").hidden = false;
+			document.querySelector(".focus-back").textContent = returnToInbox ? "Back to inbox" : "Back to dashboard";
+			focusDialog.showModal();
+			document.querySelector("#message-reply").focus();
+		}
+
+		renderMessages();
+		renderAnnouncements();
+		renderStudentRoster();
+		updateAttendanceSummary();
+
+		document.querySelectorAll("[data-role]").forEach((button) => {
+			button.addEventListener("click", () => {
+				const role = button.dataset.role;
+				const isAdmin = role === "Admin";
+				dialogTitle.textContent = `${role} sign in`;
+				document.querySelector("#login-id-label").textContent = isAdmin ? "Admin ID" : "Student ID";
+				adminIdInput.placeholder = isAdmin ? "Enter your admin ID" : "Enter your student ID";
+				document.querySelector(".dialog-kicker").textContent = "STI Campus Portal";
+				formStatus.textContent = "";
+				loginForm.reset();
+				signInDialog.dataset.role = role;
+				signInDialog.showModal();
+				adminIdInput.focus();
+			});
+		});
+
+		document.querySelector(".dialog-close").addEventListener("click", () => signInDialog.close());
+
+		signInDialog.addEventListener("click", (event) => {
+			if (event.target === signInDialog) signInDialog.close();
+		});
+
+		loginForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const enteredId = adminIdInput.value.trim();
+			const enteredPassword = document.querySelector("#password").value;
+			const role = signInDialog.dataset.role;
+
+			if (role === "Admin") {
+				if (enteredId !== adminAccount.id || enteredPassword !== adminAccount.password) {
+					formStatus.textContent = "Admin ID or password is incorrect.";
+					return;
+				}
+				currentUser = { role: "Admin", name: "Admin" };
+			} else {
+				const student = students.find((account) => account.id.toLowerCase() === enteredId.toLowerCase() && account.password === enteredPassword);
+				if (!student) {
+					formStatus.textContent = "Student ID or password is incorrect.";
+					return;
+				}
+				currentUser = { role: "Student", name: student.name, id: student.id, program: student.program };
+			}
+
+			formStatus.textContent = "";
+			signInDialog.close();
+			landingPage.hidden = true;
+			dashboard.hidden = false;
+			quickActionsButton.hidden = currentUser.role !== "Admin";
+			document.querySelector('[data-target="students"]').hidden = currentUser.role !== "Admin";
+			document.querySelector("#students").hidden = currentUser.role !== "Admin";
+			document.querySelector(".announcement-add").hidden = currentUser.role !== "Admin";
+			document.querySelector(".announcement-status").textContent = "";
+			document.querySelector(".announcement-editor").hidden = true;
+			renderAnnouncements();
+			resetAssistantConversation();
+			studentPasswordButton.hidden = currentUser.role !== "Student";
+			dashboard.querySelector(".dashboard-header h1").textContent = `${currentUser.role} dashboard`;
+			dashboard.querySelector(".dashboard-header p").textContent = currentUser.role === "Admin" ? "Here’s what’s happening across campus today." : `Welcome back, ${currentUser.name}. Here’s your campus overview.`;
+			dashboard.querySelector(".welcome-banner h2").textContent = `Welcome back, ${currentUser.name}`;
+			dashboard.querySelector(".admin-chip").setAttribute("aria-label", `${currentUser.name}, ${currentUser.role} account`);
+			dashboard.querySelector(".admin-avatar-initial").textContent = currentUser.name.trim().charAt(0).toUpperCase();
+			dashboard.querySelector(".admin-name").textContent = currentUser.name;
+			dashboard.querySelector(".admin-role").textContent = currentUser.role === "Admin" ? "Campus admin" : "Student account";
+			document.querySelector(".profile-hero-name").textContent = currentUser.name;
+			document.querySelector(".profile-detail-role").textContent = currentUser.role === "Admin" ? "Campus admin" : "Student";
+			document.querySelector(".profile-student-id").hidden = currentUser.role !== "Student";
+			document.querySelector(".profile-program").hidden = currentUser.role !== "Student";
+			document.querySelector(".profile-detail-id").textContent = currentUser.id || "";
+			document.querySelector(".profile-detail-program").textContent = currentUser.program || "";
+			profileChangePasswordButton.hidden = currentUser.role !== "Student";
+			document.querySelector(".profile-edit-button").hidden = currentUser.role !== "Student";
+			document.querySelector(".student-friends-section").hidden = currentUser.role !== "Student";
+			document.querySelector('[data-target="student-friends"]').hidden = currentUser.role !== "Student";
+			if (currentUser.role === "Student") updateProfileView(students.find((student) => student.id === currentUser.id));
+			else {
+				document.querySelector(".admin-avatar-photo").hidden = true;
+				document.querySelector(".admin-avatar-initial").hidden = false;
+			}
+			document.querySelector(".concern-submit").hidden = currentUser.role !== "Student";
+			document.querySelector(".concern-form-status").textContent = "";
+			document.querySelector(".concern-list-status").textContent = "";
+			renderStudentConcerns();
+			if (currentUser.role === "Student") renderStudentSocial();
+			updateStudentAttendancePanel();
+			document.body.classList.add("dashboard-active");
+		});
+
+		document.querySelector(".dash-logout").addEventListener("click", () => {
+			if (assistantDialog.open) assistantDialog.close();
+			assistantMessages.replaceChildren();
+			dashboard.hidden = true;
+			landingPage.hidden = false;
+			quickActionsButton.hidden = false;
+			document.querySelector('[data-target="students"]').hidden = true;
+			document.querySelector("#students").hidden = true;
+			document.querySelector(".announcement-add").hidden = true;
+			document.querySelector(".announcement-editor").hidden = true;
+			studentPasswordButton.hidden = true;
+			document.querySelector(".concern-submit").hidden = true;
+			document.querySelector(".student-friends-section").hidden = true;
+			document.querySelector('[data-target="student-friends"]').hidden = true;
+			document.querySelector(".concern-list").replaceChildren();
+			document.querySelector(".reports-count").textContent = "";
+			document.querySelector(".friends-status").textContent = "";
+			document.querySelector(".student-chat-thread").replaceChildren();
+			document.querySelector(".student-chat").hidden = true;
+			document.querySelector(".student-chat-empty").hidden = false;
+			activeStudentChatId = null;
+			currentUser = null;
+			document.body.classList.remove("dashboard-active");
+		});
+
+		document.querySelectorAll("[data-target]").forEach((control) => {
+			control.addEventListener("click", () => {
+				const targetId = control.dataset.target;
+				const target = document.getElementById(targetId);
+				const main = document.querySelector(".dashboard-main");
+				if (target && main.contains(target)) {
+					const targetTop = target.getBoundingClientRect().top - main.getBoundingClientRect().top;
+					main.scrollTo({
+						top: targetId === "overview" ? 0 : main.scrollTop + targetTop - 20,
+						behavior: "smooth"
+					});
+				}
+				document.querySelectorAll(".dash-nav button").forEach((button) => {
+					if (button.dataset.target === targetId) button.setAttribute("aria-current", "page");
+					else button.removeAttribute("aria-current");
+				});
+			});
+		});
+
+		document.querySelector(".mark-read").addEventListener("click", () => {
+			document.querySelectorAll("#notifications .message-unread").forEach((indicator) => indicator.remove());
+		});
+
+		const announcementEditor = document.querySelector(".announcement-editor");
+		function openAnnouncementEditor(announcement = null) {
+			if (currentUser?.role !== "Admin") return;
+			announcementEditor.reset();
+			announcementEditor.dataset.announcementId = announcement?.id || "";
+			announcementEditor.elements.title.value = announcement?.title || "";
+			announcementEditor.elements.body.value = announcement?.body || "";
+			document.querySelector(".announcement-editor-title").textContent = announcement ? "Edit announcement" : "New announcement";
+			document.querySelector(".announcement-save").textContent = announcement ? "Save changes" : "Publish announcement";
+			announcementEditor.hidden = false;
+			announcementEditor.scrollIntoView({ behavior: "smooth", block: "center" });
+			announcementEditor.elements.title.focus();
+		}
+
+		document.querySelector(".announcement-add").addEventListener("click", () => openAnnouncementEditor());
+		document.querySelector(".assistant-trigger").addEventListener("click", () => {
+			if (!currentUser) return;
+			assistantDialog.showModal();
+			document.querySelector("#assistant-question").focus();
+		});
+		document.querySelector(".assistant-close").addEventListener("click", () => assistantDialog.close());
+		assistantDialog.addEventListener("click", (event) => {
+			if (event.target === assistantDialog) assistantDialog.close();
+		});
+		assistantForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (!currentUser) return;
+			const question = assistantForm.elements.question.value.trim();
+			if (!question) return;
+			addAssistantMessage(question, "user");
+			addAssistantMessage(getAssistantReply(question), "assistant");
+			assistantForm.reset();
+			assistantForm.elements.question.focus();
+		});
+		document.querySelector(".assistant-suggestions").addEventListener("click", (event) => {
+			const suggestion = event.target.closest("[data-assistant-question]");
+			if (!suggestion) return;
+			const questionInput = assistantForm.elements.question;
+			questionInput.value = suggestion.dataset.assistantQuestion;
+			assistantForm.requestSubmit();
+		});
+		document.querySelector(".announcement-cancel").addEventListener("click", () => {
+			announcementEditor.hidden = true;
+			announcementEditor.reset();
+		});
+
+		announcementEditor.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (currentUser?.role !== "Admin") return;
+			const fields = new FormData(announcementEditor);
+			const title = fields.get("title").trim();
+			const body = fields.get("body").trim();
+			if (!title || !body) return;
+
+			const announcementId = announcementEditor.dataset.announcementId;
+			const existing = announcements.find((entry) => entry.id === announcementId);
+			const previousAnnouncements = announcements;
+			const updatedAt = new Date().toISOString();
+			if (existing) {
+				announcements = announcements.map((entry) => entry.id === announcementId
+					? { ...entry, title, body, updatedAt }
+					: entry);
+			} else {
+				announcements = [{
+					id: `announcement-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+					title,
+					body,
+					updatedAt
+				}, ...announcements];
+			}
+
+			try {
+				localStorage.setItem(announcementStorageKey, JSON.stringify(announcements));
+			} catch {
+				announcements = previousAnnouncements;
+				document.querySelector(".announcement-status").textContent = "Unable to save this announcement in this browser. Storage may be unavailable.";
+				return;
+			}
+			announcementEditor.hidden = true;
+			announcementEditor.reset();
+			document.querySelector(".announcement-status").textContent = existing
+				? "Announcement updated. Students using this browser will see the latest version."
+				: "Announcement published. Students using this browser will see it.";
+			renderAnnouncements();
+		});
+
+		document.querySelector(".announcement-list").addEventListener("click", (event) => {
+			const edit = event.target.closest(".announcement-edit");
+			if (edit) {
+				openAnnouncementEditor(announcements.find((entry) => entry.id === edit.dataset.announcementId));
+				return;
+			}
+			const open = event.target.closest(".announcement-open");
+			if (!open) return;
+			const announcement = announcements.find((entry) => entry.id === open.dataset.announcementId);
+			if (!announcement) return;
+			document.querySelector(".message-thread-panel").hidden = true;
+			document.querySelector("#focus-dialog-kicker").textContent = "Campus announcement";
+			document.querySelector("#focus-dialog-title").textContent = announcement.title;
+			document.querySelector("#focus-dialog-date").textContent = announcement.updatedAt
+				? `Updated ${new Date(announcement.updatedAt).toLocaleString()}`
+				: "";
+			document.querySelector("#focus-dialog-date").hidden = !announcement.updatedAt;
+			document.querySelector("#focus-dialog-description").textContent = announcement.body;
+			document.querySelector("#focus-dialog-status").hidden = true;
+			document.querySelector("#focus-dialog-status").textContent = "";
+			focusDialog.showModal();
+		});
+
+		window.addEventListener("storage", (event) => {
+			if (event.key !== announcementStorageKey) return;
+			try {
+				const updatedAnnouncements = JSON.parse(event.newValue || "[]");
+				if (!Array.isArray(updatedAnnouncements) || !updatedAnnouncements.every((announcement) =>
+					announcement.id && typeof announcement.title === "string" && typeof announcement.body === "string"
+				)) {
+					throw new Error("The saved announcements have an invalid format.");
+				}
+				announcements = updatedAnnouncements;
+				renderAnnouncements();
+				document.querySelector(".announcement-status").textContent = currentUser?.role === "Student"
+					? "Campus announcements were updated."
+					: "";
+			} catch {
+				document.querySelector(".announcement-status").textContent = "Unable to load updated campus announcements from browser storage.";
+			}
+		});
+
+		profileButton.addEventListener("click", () => {
+			if (!currentUser) return;
+			if (currentUser.role === "Student") {
+				const student = students.find((account) => account.id === currentUser.id);
+				if (student) updateProfileView(student);
+				document.querySelector(".profile-edit-button").hidden = false;
+				document.querySelector(".profile-change-password").hidden = false;
+			} else {
+				document.querySelector(".profile-hero-name").textContent = currentUser.name;
+				document.querySelector(".profile-role-badge").textContent = "Campus admin";
+				document.querySelector(".profile-campus").textContent = "STI College Ormoc";
+				document.querySelector(".profile-summary-program").textContent = "";
+				document.querySelector(".profile-about").textContent = "Campus administrator account.";
+				document.querySelector(".profile-account-role").textContent = "Campus admin";
+				document.querySelector(".profile-account-campus").textContent = "STI College Ormoc";
+				document.querySelector(".profile-account-id").hidden = true;
+				document.querySelector(".profile-student-id").hidden = true;
+				document.querySelector(".profile-program").hidden = true;
+				document.querySelector(".profile-edit-button").hidden = true;
+				document.querySelector(".profile-change-password").hidden = true;
+				document.querySelector(".profile-avatar-image").hidden = true;
+				document.querySelector(".profile-avatar-initial").hidden = false;
+				document.querySelector(".profile-avatar-initial").textContent = currentUser.name.trim().charAt(0).toUpperCase();
+			}
+			document.querySelector(".profile-edit-form").hidden = true;
+			document.querySelector(".profile-account-panel").hidden = false;
+			document.querySelectorAll("[data-profile-tab]").forEach((tab) => {
+				tab.setAttribute("aria-pressed", String(tab.dataset.profileTab === "about"));
+			});
+			document.querySelectorAll("[data-profile-panel]").forEach((panel) => {
+				panel.hidden = panel.dataset.profilePanel !== "about";
+			});
+			profileDialog.showModal();
+		});
+
+		document.querySelector(".profile-close").addEventListener("click", () => profileDialog.close());
+
+		document.querySelectorAll("[data-profile-tab]").forEach((tab) => {
+			tab.addEventListener("click", () => {
+				document.querySelectorAll("[data-profile-tab]").forEach((item) => {
+					item.setAttribute("aria-pressed", String(item === tab));
+				});
+				document.querySelectorAll("[data-profile-panel]").forEach((panel) => {
+					panel.hidden = panel.dataset.profilePanel !== tab.dataset.profileTab;
+				});
+			});
+		});
+
+		document.querySelector(".profile-edit-button").addEventListener("click", () => {
+			if (currentUser?.role !== "Student") return;
+			const profile = studentProfile(currentUser.id);
+			const student = students.find((account) => account.id === currentUser.id);
+			if (!student) return;
+			const form = document.querySelector(".profile-edit-form");
+			form.elements.about.value = profile.about;
+			form.elements.campus.value = profile.campus;
+			form.elements.program.value = student.program;
+			form.elements.avatar.value = "";
+			document.querySelector(".profile-edit-status").textContent = "";
+			form.hidden = false;
+			document.querySelector(".profile-account-panel").hidden = true;
+			form.elements.about.focus();
+		});
+
+		document.querySelector(".profile-cancel-button").addEventListener("click", () => {
+			document.querySelector(".profile-edit-form").hidden = true;
+			document.querySelector(".profile-account-panel").hidden = false;
+		});
+
+		document.querySelector(".profile-edit-form").addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (currentUser?.role !== "Student") return;
+			const form = event.currentTarget;
+			const fields = new FormData(form);
+			const student = students.find((account) => account.id === currentUser.id);
+			if (!student) return;
+			const previousProfile = studentProfile(student.id);
+			const previousProgram = student.program;
+			const previousStoredProfiles = localStorage.getItem(profileStorageKey);
+			const previousStoredStudents = localStorage.getItem(studentStorageKey);
+			const avatarFile = form.elements.avatar.files[0];
+			if (avatarFile && (!/^image\/(png|jpe?g|gif|webp)$/i.test(avatarFile.type) || avatarFile.size > 1024 * 1024)) {
+				document.querySelector(".profile-edit-status").textContent = "Choose an image smaller than 1 MB.";
+				return;
+			}
+
+			let avatar = previousProfile.avatar;
+			if (avatarFile) {
+				try {
+					avatar = await readFileAsDataUrl(avatarFile);
+				} catch (error) {
+					document.querySelector(".profile-edit-status").textContent = error.message;
+					return;
+				}
+			}
+			studentProfiles[student.id] = {
+				about: fields.get("about").trim(),
+				campus: fields.get("campus").trim(),
+				avatar
+			};
+			student.program = fields.get("program").trim();
+			currentUser.program = student.program;
+			try {
+				localStorage.setItem(profileStorageKey, JSON.stringify(studentProfiles));
+				localStorage.setItem(studentStorageKey, JSON.stringify(students));
+			} catch {
+				studentProfiles[student.id] = previousProfile;
+				student.program = previousProgram;
+				currentUser.program = previousProgram;
+				try {
+					if (previousStoredProfiles === null) localStorage.removeItem(profileStorageKey);
+					else localStorage.setItem(profileStorageKey, previousStoredProfiles);
+					if (previousStoredStudents === null) localStorage.removeItem(studentStorageKey);
+					else localStorage.setItem(studentStorageKey, previousStoredStudents);
+				} catch {
+					document.querySelector(".profile-edit-status").textContent = "The profile could not be saved, and browser storage could not restore its previous value.";
+					return;
+				}
+				document.querySelector(".profile-edit-status").textContent = "Unable to save the profile in this browser. Storage may be unavailable.";
+				return;
+			}
+			updateProfileView(student);
+			document.querySelector(".profile-account-panel").hidden = false;
+			renderStudentSocial();
+			document.querySelector(".profile-edit-status").textContent = "Profile saved.";
+		});
+
+		profileDialog.addEventListener("click", (event) => {
+			if (event.target === profileDialog) profileDialog.close();
+		});
+
+		profileChangePasswordButton.addEventListener("click", () => {
+			profileDialog.close();
+			studentPasswordButton.click();
+		});
+
+		document.querySelector("#friend-search").addEventListener("input", renderStudentSocial);
+
+		document.querySelector(".friends-layout").addEventListener("click", (event) => {
+			const button = event.target.closest("[data-student-action]");
+			if (!button || currentUser?.role !== "Student") return;
+			const { studentAction: action, studentId } = button.dataset;
+			document.querySelector(".friends-status").textContent = "";
+
+			if (action === "pending") return;
+			if (action === "requests") {
+				document.querySelector(".friend-requests").scrollIntoView({ behavior: "smooth", block: "center" });
+				return;
+			}
+			if (action === "profile") {
+				const student = students.find((account) => account.id === studentId);
+				if (!student) return;
+				updateProfileView(student);
+				document.querySelector(".profile-edit-button").hidden = true;
+				document.querySelector(".profile-change-password").hidden = true;
+				document.querySelector(".profile-edit-form").hidden = true;
+				document.querySelector(".profile-account-panel").hidden = false;
+				profileDialog.showModal();
+				return;
+			}
+			if (action === "chat") {
+				openStudentChat(studentId);
+				return;
+			}
+			if (action === "add") {
+				if (studentId === currentUser.id || getFriendIds().includes(studentId)) return;
+				const existingRequest = friendRequests.some((request) =>
+					request.status === "Pending"
+					&& ((request.fromId === currentUser.id && request.toId === studentId)
+						|| (request.fromId === studentId && request.toId === currentUser.id))
+				);
+				if (existingRequest) return;
+				const request = {
+					id: `friend-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+					fromId: currentUser.id,
+					toId: studentId,
+					status: "Pending",
+					sentAt: new Date().toISOString()
+				};
+				friendRequests.push(request);
+				if (!saveStudentSocialData()) {
+					friendRequests.pop();
+					document.querySelector(".friends-status").textContent = "Unable to send the friend request because browser storage is unavailable.";
+					return;
+				}
+				document.querySelector(".friends-status").textContent = "Friend request sent.";
+				renderStudentSocial();
+				return;
+			}
+			if (action === "accept-request" || action === "decline-request") {
+				const requestIndex = friendRequests.findIndex((request) =>
+					request.fromId === studentId && request.toId === currentUser.id && request.status === "Pending"
+				);
+				if (requestIndex === -1) return;
+				const request = friendRequests[requestIndex];
+				const previousFriendships = [...friendships];
+				if (action === "accept-request") {
+					request.status = "Accepted";
+					friendships.push({ studentIds: [currentUser.id, studentId].sort((first, second) => first.localeCompare(second)), acceptedAt: new Date().toISOString() });
+				} else {
+					friendRequests.splice(requestIndex, 1);
+				}
+				if (!saveStudentSocialData()) {
+					friendRequests.splice(requestIndex, 1, request);
+					request.status = "Pending";
+					friendships = previousFriendships;
+					document.querySelector(".friends-status").textContent = "Unable to update the friend request because browser storage is unavailable.";
+					return;
+				}
+				document.querySelector(".friends-status").textContent = action === "accept-request" ? "Friend request accepted." : "Friend request declined.";
+				renderStudentSocial();
+			}
+		});
+
+		document.querySelector(".student-chat-form").addEventListener("submit", async (event) => {
+			event.preventDefault();
+			if (currentUser?.role !== "Student" || !activeStudentChatId) return;
+			const form = event.currentTarget;
+			const text = form.elements.message.value.trim();
+			const file = form.elements.attachment.files[0];
+			if (!text && !file) {
+				document.querySelector(".student-chat-status").textContent = "Write a message or attach a file.";
+				return;
+			}
+			let attachment = null;
+			if (file) {
+				const allowedExtension = /\.(png|jpe?g|gif|webp|pdf|txt|docx?)$/i.test(file.name);
+				const allowedType = file.type.startsWith("image/") || ["application/pdf", "text/plain", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(file.type);
+				if (file.size > 2 * 1024 * 1024 || !allowedExtension || !allowedType) {
+					document.querySelector(".student-chat-status").textContent = "Choose an image or common document smaller than 2 MB.";
+					return;
+				}
+				try {
+					attachment = { name: file.name, type: file.type, dataUrl: await readFileAsDataUrl(file) };
+				} catch (error) {
+					document.querySelector(".student-chat-status").textContent = error.message;
+					return;
+				}
+			}
+			const chat = studentChats.find((entry) => entry.id === activeStudentChatId);
+			if (!chat || !chat.studentIds.includes(currentUser.id)) return;
+			const message = { senderId: currentUser.id, text, attachment, sentAt: new Date().toISOString() };
+			chat.messages.push(message);
+			if (!saveStudentSocialData()) {
+				chat.messages.pop();
+				document.querySelector(".student-chat-status").textContent = "Unable to save this message in the browser. Storage may be unavailable or full.";
+				return;
+			}
+			form.reset();
+			document.querySelector(".chat-attachment-name").textContent = "No file selected · max 2 MB";
+			document.querySelector(".student-chat-status").textContent = "Message saved in this browser.";
+			renderStudentChat();
+		});
+
+		document.querySelector("#student-chat-file").addEventListener("change", (event) => {
+			const file = event.currentTarget.files[0];
+			document.querySelector(".chat-attachment-name").textContent = file ? `${file.name} · ${Math.ceil(file.size / 1024)} KB` : "No file selected · max 2 MB";
+			document.querySelector(".student-chat-status").textContent = "";
+		});
+
+		document.querySelectorAll(".event-focus, .notification-focus").forEach((item) => {
+			item.addEventListener("click", () => {
+				document.querySelector(".message-thread-panel").hidden = true;
+				const isEvent = item.classList.contains("event-focus");
+				document.querySelector("#focus-dialog-kicker").textContent = isEvent ? "Campus event" : "Notification";
+				document.querySelector("#focus-dialog-title").textContent = item.dataset.detailTitle;
+				document.querySelector("#focus-dialog-date").textContent = item.dataset.detailDate || "";
+				document.querySelector("#focus-dialog-date").hidden = !item.dataset.detailDate;
+				document.querySelector("#focus-dialog-description").textContent = item.dataset.detailDescription;
+				document.querySelector("#focus-dialog-status").textContent = item.dataset.detailStatus || "";
+				document.querySelector("#focus-dialog-status").hidden = !item.dataset.detailStatus;
+				item.querySelector(".message-unread")?.remove();
+				focusDialog.showModal();
+				document.querySelector(".focus-close").focus();
+			});
+		});
+
+		inboxList.addEventListener("click", (event) => {
+			const messageButton = event.target.closest(".message-open");
+			if (messageButton) openMessage(messageButton.dataset.messageId, true);
+		});
+
+		document.querySelector(".concern-form").addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (currentUser?.role !== "Student") return;
+
+			const form = event.currentTarget;
+			const fields = new FormData(form);
+			const concern = {
+				id: `concern-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+				studentId: currentUser.id,
+				studentName: currentUser.name,
+				category: fields.get("category").trim(),
+				subject: fields.get("subject").trim(),
+				description: fields.get("description").trim(),
+				status: "Received",
+				submittedAt: new Date().toISOString()
+			};
+			if (!concern.category || !concern.subject || !concern.description) return;
+
+			studentConcerns.unshift(concern);
+			try {
+				localStorage.setItem(concernStorageKey, JSON.stringify(studentConcerns));
+			} catch {
+				studentConcerns.shift();
+				document.querySelector(".concern-form-status").textContent = "Unable to save your concern in this browser. Storage may be unavailable.";
+				return;
+			}
+
+			form.reset();
+			document.querySelector(".concern-form-status").textContent = "Your concern was submitted and is now marked as received.";
+			renderStudentConcerns();
+		});
+
+		document.querySelector(".concern-list").addEventListener("change", (event) => {
+			const select = event.target.closest(".concern-status-select");
+			if (!select || currentUser?.role !== "Admin") return;
+			const concern = studentConcerns.find((entry) => entry.id === select.dataset.concernId);
+			if (!concern || !["Received", "In review", "Resolved"].includes(select.value)) return;
+
+			const previousStatus = concern.status;
+			concern.status = select.value;
+			try {
+				localStorage.setItem(concernStorageKey, JSON.stringify(studentConcerns));
+			} catch {
+				concern.status = previousStatus;
+				select.value = previousStatus;
+				document.querySelector(".concern-list-status").textContent = "Unable to update the report in this browser. Storage may be unavailable.";
+				return;
+			}
+
+			document.querySelector(".concern-list-status").textContent = "Report status updated.";
+			renderStudentConcerns();
+		});
+
+		document.querySelector(".concern-list").addEventListener("submit", (event) => {
+			const form = event.target.closest(".concern-response-form");
+			if (!form) return;
+			event.preventDefault();
+			if (currentUser?.role !== "Admin") return;
+			const card = form.closest(".concern-card");
+			const concern = studentConcerns.find((entry) => entry.id === card?.dataset.concernId);
+			const reply = new FormData(form).get("adminResponse").trim();
+			const status = form.querySelector(".concern-response-form-status");
+			if (!concern || !reply) {
+				status.textContent = "Write an update before sending it to the student.";
+				return;
+			}
+
+			const previousResponse = concern.adminResponse;
+			const previousRespondedAt = concern.respondedAt;
+			concern.adminResponse = reply;
+			concern.respondedAt = new Date().toISOString();
+			try {
+				localStorage.setItem(concernStorageKey, JSON.stringify(studentConcerns));
+			} catch {
+				concern.adminResponse = previousResponse;
+				concern.respondedAt = previousRespondedAt;
+				status.textContent = "Unable to save the reply in this browser. Storage may be unavailable.";
+				return;
+			}
+			document.querySelector(".concern-list-status").textContent = "Your update was saved and is visible to the student who submitted this report.";
+			renderStudentConcerns();
+		});
+
+		document.querySelector(".inbox-close").addEventListener("click", () => inboxDialog.close());
+
+		inboxDialog.addEventListener("click", (event) => {
+			if (event.target === inboxDialog) inboxDialog.close();
+		});
+
+		document.querySelector(".compose-message-form").addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (!currentUser) return;
+			const form = event.currentTarget;
+			const fields = new FormData(form);
+			const recipient = fields.get("recipient").trim();
+			const subject = fields.get("subject").trim();
+			const text = fields.get("message").trim();
+			if (!recipient || !subject || !text) return;
+
+			const message = {
+				id: `message-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+				sender: currentUser.name,
+				recipient,
+				subject,
+				unread: false,
+				thread: [{ sender: currentUser.name, role: currentUser.role, text, sentAt: new Date().toISOString() }]
+			};
+			messages.unshift(message);
+			if (!saveMessages()) {
+				messages.shift();
+				document.querySelector(".compose-status").textContent = "Unable to save your message in this browser. Storage may be unavailable.";
+				return;
+			}
+			form.reset();
+			document.querySelector(".compose-status").textContent = "Message saved in this browser.";
+			renderMessages();
+			openMessage(message.id, true);
+		});
+
+		document.querySelector(".message-reply-form").addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (!currentUser) return;
+			const form = event.currentTarget;
+			const text = new FormData(form).get("reply").trim();
+			const message = messages.find((entry) => entry.id === form.dataset.messageId);
+			if (!message || !text) return;
+
+			const reply = { sender: currentUser.name, role: currentUser.role, text, sentAt: new Date().toISOString() };
+			message.thread.push(reply);
+			message.unread = true;
+			if (!saveMessages()) {
+				message.unread = false;
+				message.thread.pop();
+				document.querySelector(".message-status").textContent = "Unable to save your reply in this browser. Storage may be unavailable.";
+				return;
+			}
+			form.reset();
+			document.querySelector(".message-status").textContent = "Reply saved in this browser.";
+			renderMessages();
+			renderMessageThread(message);
+		});
+
+		document.querySelectorAll(".focus-close, .focus-back").forEach((button) => {
+			button.addEventListener("click", () => focusDialog.close());
+		});
+
+		focusDialog.addEventListener("click", (event) => {
+			if (event.target === focusDialog) focusDialog.close();
+		});
+
+		document.querySelector(".time-in-button").addEventListener("click", () => {
+			if (currentUser?.role !== "Student") return;
+			const today = localDateKey(new Date());
+			if (attendanceRecords.some((record) => record.id === currentUser.id && record.date === today)) {
+				updateStudentAttendancePanel();
+				return;
+			}
+
+			const record = {
+				id: currentUser.id,
+				name: currentUser.name,
+				date: today,
+				status: "Present",
+				timeIn: new Date().toISOString(),
+				timeOut: null
+			};
+			attendanceRecords.push(record);
+			try {
+				saveAttendanceRecords();
+			} catch {
+				attendanceRecords.pop();
+				document.querySelector(".student-attendance-result").textContent = "Unable to save your attendance in this browser. Storage may be unavailable.";
+				return;
+			}
+			updateAttendanceSummary();
+			updateStudentAttendancePanel();
+		});
+
+		document.querySelector(".time-out-button").addEventListener("click", () => {
+			if (currentUser?.role !== "Student") return;
+			const today = localDateKey(new Date());
+			const record = attendanceRecords.find((entry) => entry.id === currentUser.id && entry.date === today);
+			if (!record?.timeIn || record.timeOut || record.status === "Absent") return;
+
+			record.timeOut = new Date().toISOString();
+			try {
+				saveAttendanceRecords();
+			} catch {
+				record.timeOut = null;
+				document.querySelector(".student-attendance-result").textContent = "Unable to save your time out in this browser. Storage may be unavailable.";
+				return;
+			}
+			updateStudentAttendancePanel();
+		});
+
+		document.querySelector(".quick-trigger").addEventListener("click", () => {
+			if (currentUser?.role !== "Admin") return;
+			quickActionsDialog.showModal();
+			document.querySelector(".quick-option").focus();
+		});
+
+		document.querySelector(".quick-close").addEventListener("click", () => quickActionsDialog.close());
+
+		quickActionsDialog.addEventListener("click", (event) => {
+			if (event.target === quickActionsDialog) quickActionsDialog.close();
+		});
+
+		studentPasswordButton.addEventListener("click", () => {
+			if (currentUser?.role !== "Student") return;
+			changePasswordForm.reset();
+			passwordStatus.textContent = "";
+			changePasswordDialog.showModal();
+			changePasswordForm.querySelector("[name='currentPassword']").focus();
+		});
+
+		document.querySelector(".password-close").addEventListener("click", () => changePasswordDialog.close());
+
+		changePasswordDialog.addEventListener("click", (event) => {
+			if (event.target === changePasswordDialog) changePasswordDialog.close();
+		});
+
+		changePasswordForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (currentUser?.role !== "Student") return;
+
+			const fields = new FormData(changePasswordForm);
+			const currentPassword = fields.get("currentPassword");
+			const newPassword = fields.get("newPassword");
+			const confirmPassword = fields.get("confirmPassword");
+			const student = students.find((account) => account.id === currentUser.id);
+
+			if (!student || student.password !== currentPassword) {
+				passwordStatus.textContent = "Your current password is incorrect.";
+				return;
+			}
+			if (newPassword.length < 8) {
+				passwordStatus.textContent = "Your new password must be at least 8 characters.";
+				return;
+			}
+			if (newPassword !== confirmPassword) {
+				passwordStatus.textContent = "The new passwords do not match.";
+				return;
+			}
+
+			const previousPassword = student.password;
+			student.password = newPassword;
+			try {
+				localStorage.setItem(studentStorageKey, JSON.stringify(students));
+			} catch {
+				student.password = previousPassword;
+				passwordStatus.textContent = "Unable to save your new password in this browser. Storage may be unavailable.";
+				return;
+			}
+
+			changePasswordForm.reset();
+			passwordStatus.textContent = "Password changed successfully.";
+		});
+
+		document.querySelectorAll(".quick-option").forEach((button) => {
+			button.addEventListener("click", () => showQuickAction(button.dataset.action));
+		});
+
+		document.querySelector(".student-bulk-register").addEventListener("click", () => {
+			if (currentUser?.role !== "Admin") return;
+			quickActionsDialog.showModal();
+			showQuickAction("bulk-register");
+		});
+
+		document.querySelectorAll("#student-roster-search,#student-roster-grade,#student-roster-strand").forEach((control) => {
+			control.addEventListener("input", renderStudentRoster);
+			control.addEventListener("change", renderStudentRoster);
+		});
+
+		quickDetail.addEventListener("click", (event) => {
+			if (event.target.closest(".quick-template")) {
+				downloadCsv(
+					[["Student ID", "Name", "Grade", "Strand", "Password"], ["STI-2048", "Jordan Davis", "11", "STEM", ""]],
+					"student-registration-template.csv"
+				);
+			}
+		});
+
+		quickDetail.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (currentUser?.role !== "Admin") return;
+			const form = event.target;
+			const fields = new FormData(form);
+			const action = form.dataset.formAction;
+
+			if (action === "register") {
+				const studentId = fields.get("studentId").trim();
+				if (students.some((student) => student.id.toLowerCase() === studentId.toLowerCase())) {
+					setQuickResult(form, "That student ID is already registered.");
+					return;
+				}
+				let password = fields.get("studentPassword").trim();
+				if (!password) {
+					try {
+						password = generateStudentPassword();
+					} catch (error) {
+						setQuickResult(form, `Unable to generate a student password. ${error.message}`);
+						return;
+					}
+				}
+				const name = fields.get("studentName").trim();
+				const grade = fields.get("grade").trim();
+				const strand = fields.get("strand").trim();
+				const student = {
+					id: studentId,
+					password,
+					name,
+					grade,
+					strand,
+					program: fields.get("program").trim() || `${strand} ${grade}`
+				};
+				students.push(student);
+				try {
+					localStorage.setItem(studentStorageKey, JSON.stringify(students));
+				} catch {
+					students.pop();
+					setQuickResult(form, "Unable to save the account in this browser. Storage may be unavailable.");
+					return;
+				}
+				renderStudentRoster();
+				form.reset();
+				setQuickResult(form, `Student account saved in this browser. Student ID: ${student.id}. ${fields.get("studentPassword").trim() ? "Custom" : "Generated"} password: ${student.password}. Share it with the student; it will not be shown again.`);
+				return;
+			}
+
+			if (action === "bulk-register") {
+				let rows;
+				try {
+					rows = parseCsvRows(fields.get("studentCsv").replace(/^\uFEFF/, ""));
+				} catch (error) {
+					setQuickResult(form, `Unable to read the CSV. ${error.message}`);
+					return;
+				}
+				if (rows.length < 2) {
+					setQuickResult(form, "Add a header row and at least one student row.");
+					return;
+				}
+
+				const headers = rows[0].map((value) => value.toLocaleLowerCase());
+				const columns = {
+					id: headers.findIndex((value) => value === "student id" || value === "id"),
+					name: headers.findIndex((value) => value === "name" || value === "student name"),
+					grade: headers.findIndex((value) => value === "grade"),
+					strand: headers.findIndex((value) => value === "strand"),
+					password: headers.findIndex((value) => value === "password")
+				};
+				if (columns.id < 0 || columns.name < 0 || columns.grade < 0 || columns.strand < 0) {
+					setQuickResult(form, "The CSV needs Student ID, Name, Grade, and Strand columns. Password is optional.");
+					return;
+				}
+
+				const knownIds = new Set(students.map((student) => student.id.toLocaleLowerCase()));
+				const additions = [];
+				const skipped = [];
+				for (let index = 1; index < rows.length; index += 1) {
+					const row = rows[index];
+					const student = {
+						id: row[columns.id] || "",
+						name: row[columns.name] || "",
+						grade: row[columns.grade] || "",
+						strand: row[columns.strand] || "",
+						password: columns.password < 0 ? "" : row[columns.password] || ""
+					};
+					if (!student.id || !student.name || !student.grade || !student.strand) {
+						skipped.push(`row ${index + 1}: missing required information`);
+						continue;
+					}
+					if (student.id.length > 80 || student.name.length > 120 || student.grade.length > 40 || student.strand.length > 60) {
+						skipped.push(`row ${index + 1}: a field is too long`);
+						continue;
+					}
+					if (knownIds.has(student.id.toLocaleLowerCase())) {
+						skipped.push(`row ${index + 1}: student ID is already registered or repeated`);
+						continue;
+					}
+					if (student.password && (student.password.length < 8 || student.password.length > 128)) {
+						skipped.push(`row ${index + 1}: password must be 8 to 128 characters`);
+						continue;
+					}
+					if (!student.password) {
+						try {
+							student.password = generateStudentPassword();
+						} catch (error) {
+							setQuickResult(form, `No accounts were imported. Unable to generate a password. ${error.message}`);
+							return;
+						}
+					}
+					student.program = `${student.strand} ${student.grade}`;
+					knownIds.add(student.id.toLocaleLowerCase());
+					additions.push(student);
+				}
+
+				if (additions.length === 0) {
+					const details = skipped.slice(0, 5).join("; ");
+					setQuickResult(form, `No students were imported.${details ? ` ${details}` : ""}`);
+					return;
+				}
+
+				const updatedStudents = [...students, ...additions];
+				const credentialsRows = [
+					["Student ID", "Name", "Grade", "Strand", "Password"],
+					...additions.map((student) => [student.id, student.name, student.grade, student.strand, student.password])
+				];
+				let credentialsUrl;
+				try {
+					credentialsUrl = URL.createObjectURL(new Blob([csvContent(credentialsRows)], { type: "text/csv;charset=utf-8" }));
+				} catch {
+					setQuickResult(form, "No accounts were imported because the credentials download could not be prepared.");
+					return;
+				}
+				try {
+					localStorage.setItem(studentStorageKey, JSON.stringify(updatedStudents));
+				} catch {
+					URL.revokeObjectURL(credentialsUrl);
+					setQuickResult(form, "Unable to save the imported accounts in this browser. No students were added; browser storage may be unavailable or full.");
+					return;
+				}
+				if (bulkCredentialsUrl) URL.revokeObjectURL(bulkCredentialsUrl);
+				bulkCredentialsUrl = credentialsUrl;
+				const credentialsLink = form.querySelector(".quick-download");
+				credentialsLink.href = bulkCredentialsUrl;
+				credentialsLink.download = "student-account-credentials.csv";
+				credentialsLink.hidden = false;
+				students = updatedStudents;
+				renderStudentRoster();
+				form.reset();
+				const skippedDetails = skipped.length ? ` Skipped ${skipped.length} row(s): ${skipped.slice(0, 5).join("; ")}.` : "";
+				setQuickResult(form, `Registered ${additions.length} student${additions.length === 1 ? "" : "s"}. Download the credentials CSV now; generated passwords are only available in this download.${skippedDetails}`);
+				return;
+			}
+
+			if (action === "view") {
+				const student = students.find((record) => record.id.toLowerCase() === fields.get("studentId").trim().toLowerCase());
+				setQuickResult(form, student ? `${student.name} · ${student.id} · ${student.program}` : "No matching student in this browser. Register the student first.");
+				return;
+			}
+
+			if (action === "delete-student") {
+				const studentIndex = students.findIndex((record) => record.id.toLowerCase() === fields.get("studentId").trim().toLowerCase());
+				if (studentIndex === -1) {
+					setQuickResult(form, "No matching student in this browser. Register the student first.");
+					return;
+				}
+
+				const [student] = students.splice(studentIndex, 1);
+				try {
+					localStorage.setItem(studentStorageKey, JSON.stringify(students));
+				} catch {
+					students.splice(studentIndex, 0, student);
+					setQuickResult(form, "Unable to delete the account in this browser. Storage may be unavailable.");
+					return;
+				}
+				const previousRequests = friendRequests;
+				const previousFriendships = friendships;
+				const previousChats = studentChats;
+				const previousProfile = studentProfiles[student.id];
+				friendRequests = friendRequests.filter((request) => request.fromId !== student.id && request.toId !== student.id);
+				friendships = friendships.filter((friendship) => !friendship.studentIds.includes(student.id));
+				studentChats = studentChats.filter((chat) => !chat.studentIds.includes(student.id));
+				delete studentProfiles[student.id];
+				try {
+					localStorage.setItem(profileStorageKey, JSON.stringify(studentProfiles));
+					if (!saveStudentSocialData()) throw new Error("Social data could not be saved.");
+				} catch {
+					friendRequests = previousRequests;
+					friendships = previousFriendships;
+					studentChats = previousChats;
+					if (previousProfile) studentProfiles[student.id] = previousProfile;
+					students.splice(studentIndex, 0, student);
+					try {
+						localStorage.setItem(studentStorageKey, JSON.stringify(students));
+						localStorage.setItem(profileStorageKey, JSON.stringify(studentProfiles));
+						if (!saveStudentSocialData()) throw new Error("Social data could not be restored.");
+					} catch {
+						setQuickResult(form, "Account cleanup failed and browser storage could not restore all previous data.");
+						return;
+					}
+					setQuickResult(form, "Unable to delete this account and its social data because browser storage is unavailable.");
+					return;
+				}
+
+				renderStudentRoster();
+				form.reset();
+				setQuickResult(form, `${student.name} (${student.id})'s account was deleted. Existing attendance records were kept.`);
+				return;
+			}
+
+			if (action === "reset-password") {
+				const student = students.find((record) => record.id.toLowerCase() === fields.get("studentId").trim().toLowerCase());
+				if (!student) {
+					setQuickResult(form, "No matching student in this browser. Register the student first.");
+					return;
+				}
+
+				const previousPassword = student.password;
+				try {
+					student.password = generateStudentPassword();
+				} catch (error) {
+					setQuickResult(form, `Unable to generate a student password. ${error.message}`);
+					return;
+				}
+
+				try {
+					localStorage.setItem(studentStorageKey, JSON.stringify(students));
+				} catch {
+					student.password = previousPassword;
+					setQuickResult(form, "Unable to save the new password in this browser. Storage may be unavailable.");
+					return;
+				}
+
+				form.reset();
+				setQuickResult(form, `New password for ${student.name} (${student.id}): ${student.password}. Share it with the student; it will not be shown again.`);
+				return;
+			}
+
+			if (action === "attendance") {
+				const student = students.find((record) => record.id.toLowerCase() === fields.get("studentId").trim().toLowerCase());
+				if (!student) {
+					setQuickResult(form, "Student not found in this browser. Register the student first.");
+					return;
+				}
+				const recordDate = fields.get("attendanceDate");
+				const existingRecord = attendanceRecords.find((record) => record.id === student.id && record.date === recordDate);
+				const previousStatus = existingRecord?.status;
+				if (existingRecord) existingRecord.status = fields.get("status");
+				else attendanceRecords.push({ id: student.id, name: student.name, date: recordDate, status: fields.get("status"), timeIn: null, timeOut: null });
+				try {
+					saveAttendanceRecords();
+				} catch {
+					if (existingRecord) existingRecord.status = previousStatus;
+					else attendanceRecords.pop();
+					setQuickResult(form, "Unable to save attendance in this browser. Storage may be unavailable.");
+					return;
+				}
+				updateAttendanceSummary();
+				setQuickResult(form, `${student.name} marked ${fields.get("status").toLowerCase()} for ${recordDate}.`);
+				return;
+			}
+
+			if (action === "reports") {
+				const reportType = fields.get("reportType");
+				const rows = reportType === "students"
+					? [["Student ID", "Name", "Grade", "Strand", "Program / section"], ...[...students].sort((first, second) => first.name.localeCompare(second.name, undefined, { sensitivity: "base" })).map((student) => [student.id, student.name, student.grade || "", student.strand || "", student.program || ""])]
+					: [["Student ID", "Name", "Date", "Status", "Time in", "Time out"], ...attendanceRecords.map((record) => [record.id, record.name, record.date, record.status, record.timeIn ? displayTime(record.timeIn) : "", record.timeOut ? displayTime(record.timeOut) : ""])];
+				downloadCsv(rows, `${reportType}-report.csv`);
+				setQuickResult(form, `Report generated with ${rows.length - 1} ${reportType === "students" ? "student" : "attendance"} record(s).`);
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "monitoring-system-sqlite",
+  "version": "1.0.0",
+  "description": "STI Attendance Monitoring System with SQLite persistence",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  }
+}
